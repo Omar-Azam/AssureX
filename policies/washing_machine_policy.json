@@ -1,0 +1,221 @@
+{
+  "policy_metadata": {
+    "policy_id": "POL-WM-PK-2026-V1",
+    "policy_name": "Consumer Washing Machine Warranty Policy - Pakistan Region",
+    "policy_version": "1.0.0",
+    "effective_date": "2026-01-01",
+    "market_region": "Pakistan",
+    "jurisdiction": "Punjab Consumer Protection Act 2005 / Sindh Consumer Protection Act 2014 & Federal Standards",
+    "currency": "PKR"
+  },
+  "product_category": "Washing Machine",
+  "applicable_subcategories": [
+    "Fully Automatic Front-Load Inverter Washing Machine",
+    "Fully Automatic Top-Load Inverter Washing Machine",
+    "Semi-Automatic Twin-Tub Washer"
+  ],
+  "coverage_duration": {
+    "comprehensive_general_months": 12,
+    "inverter_direct_drive_motor_months": 120,
+    "conventional_induction_motor_months": 24,
+    "inverter_control_pcb_months": 36,
+    "inner_drum_outer_tub_integrity_months": 60,
+    "labor_and_home_visit_free_months": 12,
+    "bundled_accessories_months": 6
+  },
+  "warranty_start_conditions": {
+    "primary_trigger": "Date of verified retail purchase invoice issued by an authorized dealer",
+    "commissioning_requirement": "For fully automatic inverter front-load and top-load units, warranty requires documented installation and electrical earthing verification by an authorized service franchisee within 14 calendar days of delivery",
+    "prerequisites": [
+      "Original sales invoice with registered Sales Tax (STRN) or National Tax Number (NTN)",
+      "Official distributor warranty card stamped and signed by an authorized retail dealer",
+      "Valid electrical earthing / ground connection verified at the customer's installation socket"
+    ]
+  },
+  "claim_reporting_period_days": 7,
+  "grace_period_days": 15,
+  "covered_faults": [
+    "Inverter Direct Drive / Smart Inverter motor electrical failure (stator winding burn, hall sensor defect, rotor detachment under normal load)",
+    "Main electronic controller / inverter drive PCB failure (logic crash, error codes E1, E2, E3, OE, DE, IGBT module burnout under rated voltage)",
+    "Water inlet solenoid valve mechanical seizure or coil burnout",
+    "Drain pump motor electrical failure or impeller spindle fracture",
+    "Electronic door safety interlock lock/switch failure",
+    "Suspension damper and balance spring mechanical fatigue (excluding overload collapse)",
+    "Internal heating element open-circuit / thermistor sensor calibration failure",
+    "Drum spider bracket structural fracture under manufacturer-specified wash weight"
+  ],
+  "exclusions": [
+    "Electrical surge, spike, or lightning strike damage resulting from direct connection to AC mains without an automated 15A voltage stabilizer or surge protector where grid voltage exceeds 260V or drops below 160V",
+    "Operation using modified square-wave uninterruptible power supplies (UPS) or substandard local portable generators lacking pure sine wave output",
+    "Chewed electrical harnesses, shorted control boards, or debris accumulation caused by rodent, insect, cockroach, or lizard infestation inside the base cabinet",
+    "Excessive limescale buildup, calcium encrustation, or chemical corrosion on heating coils, valves, and inner tub caused by high-TDS saline/brackish groundwater exceeding 1200 PPM",
+    "Commercial, institutional, or communal use (e.g. laundromat, hostel, beauty salon, hospital, hotel, or daily domestic cycles exceeding 4 runs per day)",
+    "External body dents, scratch damage, rusted base plate resulting from continuous standing water, transit damages, or broken cosmetic plastic lids/filters",
+    "Drain pump or outer tub mechanical lockup caused by foreign objects (coins, hairpins, nails, bra underwires, buttons) trapped in the lint filter chamber",
+    "Any unauthorized disassembly, PCB component re-soldering, or motor rewinding carried out by independent bazaar technicians (e.g. Hall Road, Saddar, local electrical shops)"
+  ],
+  "repair_conditions": {
+    "technician_dispatch_sla_hours": 48,
+    "standard_turnaround_time_days": 5,
+    "spare_parts_origin": "100% Genuine OEM factory-certified spare parts sourced through authorized national distributor depots",
+    "in_home_vs_depot": "Standard faults are rectified on-site at the consumer's premises. If drum spider replacement, tub bearing replacement, or complex PCB bench diagnostic is required, the unit or sub-assembly will be transported to the regional central workshop",
+    "warranty_on_replaced_parts_days": 90,
+    "repaired_parts_post_warranty_policy": "Parts replaced under paid non-warranty service carry a 90-day functional warranty from the date of repair completion"
+  },
+  "authorized_service_centre_requirement": {
+    "mandate": "All warranty inspections, diagnostics, and repairs must be executed strictly by certified brand Authorized Service Center (ASC) personnel possessing official digital job cards",
+    "unauthorized_service_penalty": "Immediate cancellation and voiding of the remaining warranty term if third-party tamper seals are broken or non-OEM screws/wiring splices are detected",
+    "territorial_coverage": "Doorstep on-site warranty coverage applies to all tier-1 and tier-2 cities across Pakistan (Karachi, Lahore, Islamabad/Rawalpindi, Faisalabad, Multan, Peshawar, Gujranwala, Quetta, Sialkot, Hyderabad, Sukkur). Remote tier-3 locations may require scheduling with regional mobile technical squads"
+  },
+  "replacement_conditions": {
+    "doa_period_days": 14,
+    "doa_conditions": "Dead on Arrival (DOA) or catastrophic functional failure occurring within 14 calendar days of delivery, verified by an authorized technician, provided the unit exhibits zero cosmetic scratches and includes original packaging",
+    "unresolved_repeat_failure_threshold": 3,
+    "unresolved_repeat_failure_condition": "Failure of the same primary sub-assembly (Inverter Motor or Main Inverter PCB) occurring 3 consecutive times within the initial 6 months of operation",
+    "parts_backorder_sla_days": 30,
+    "parts_backorder_condition": "Inability of the authorized national parts depot to supply critical functional replacement parts within 30 consecutive calendar days from technical diagnostic approval",
+    "replacement_tier": "Exact identical model, or a current-generation equivalent model with matching or superior technical specifications if the original model has been discontinued"
+  },
+  "mandatory_documents": [
+    "Original Retail Purchase Invoice bearing official dealer stamp, customer name, date of purchase, model, serial number, and NTN/STRN",
+    "Original Brand Warranty Card bearing retailer's physical stamp and signature",
+    "Authorized Service Installation and Commissioning Job Sheet (mandatory for front-load inverter models)",
+    "Clear photograph of the rear rating plate displaying serial barcode and manufacturing date",
+    "National Identity Card (CNIC) copy of the registered purchaser"
+  ],
+  "hard_fail_rules": [
+    {
+      "rule_id": "HF-WM-001",
+      "rule_name": "Commercial Usage Detected",
+      "condition": "installation_environment in ['commercial_laundry', 'hostel', 'hotel', 'beauty_parlor', 'garment_factory', 'dairy'] || daily_cycle_count > 4",
+      "resulting_class": "REJECTED_COMMERCIAL_USE",
+      "description": "Appliance operated in a commercial, communal, or industrial facility; domestic warranty completely voided."
+    },
+    {
+      "rule_id": "HF-WM-002",
+      "rule_name": "Unauthorized Third-Party Tampering",
+      "condition": "tamper_seal_broken == true || third_party_repair_evidence == true || non_oem_wiring_splice == true",
+      "resulting_class": "REJECTED_UNAUTHORIZED_REPAIR",
+      "description": "Appliance disassembled, repaired, or modified by unauthorized local workshop technicians."
+    },
+    {
+      "rule_id": "HF-WM-003",
+      "rule_name": "Rodent or Pest Infestation Damage",
+      "condition": "rodent_damage_detected == true || insect_infestation_pcb_short == true",
+      "resulting_class": "REJECTED_PEST_INFESTATION",
+      "description": "Wiring loom chewed by rats or PCB short-circuited by insects/lizards inside the cabinet."
+    },
+    {
+      "rule_id": "HF-WM-004",
+      "rule_name": "Physical and Impact Damage",
+      "condition": "external_cabinet_dented == true || outer_tub_fracture_impact == true || transit_drop_evidence == true",
+      "resulting_class": "REJECTED_PHYSICAL_DAMAGE",
+      "description": "Physical, accidental, or transit drops and structural impacts are excluded from warranty coverage."
+    },
+    {
+      "rule_id": "HF-WM-005",
+      "rule_name": "Warranty Period Expired with Grace Exhaustion",
+      "condition": "days_since_warranty_expiry > 15",
+      "resulting_class": "REJECTED_EXPIRED_WARRANTY",
+      "description": "Claim registered more than 15 calendar days after the expiration of the comprehensive warranty duration."
+    },
+    {
+      "rule_id": "HF-WM-006",
+      "rule_name": "Unprotected Power Surge on Non-Stabilized Mains",
+      "condition": "voltage_surge_burn_detected == true && automatic_voltage_stabilizer_installed == false",
+      "resulting_class": "REJECTED_POWER_SURGE_UNPROTECTED",
+      "description": "Catastrophic PCB surge burnout caused by operating directly on high-fluctuation AC mains without an automated 15A voltage stabilizer."
+    },
+    {
+      "rule_id": "HF-WM-007",
+      "rule_name": "Missing Proof of Purchase and Warranty Card",
+      "condition": "original_invoice_available == false && warranty_card_available == false",
+      "resulting_class": "REJECTED_DOCUMENTATION_INCOMPLETE",
+      "description": "Claim cannot be verified without either the original stamped warranty card or verifiable GST invoice."
+    }
+  ],
+  "warning_rules": [
+    {
+      "rule_id": "WRN-WM-001",
+      "rule_name": "Saline Groundwater Limescale Accumulation",
+      "condition": "water_source_tds_ppm > 1000 || heating_element_scaled == true",
+      "warning_flag": "FLAG_WATER_QUALITY_ADVISORY",
+      "warning_message": "Water source exhibits high TDS (>1000 PPM). Mineral descaling required; future valve/heater failures from scale will be billable.",
+      "action_required": "Issue water softener recommendation and document current descaling charge status on job card."
+    },
+    {
+      "rule_id": "WRN-WM-002",
+      "rule_name": "Claim Registered Inside Grace Period",
+      "condition": "days_since_warranty_expiry > 0 && days_since_warranty_expiry <= 15",
+      "warning_flag": "FLAG_GRACE_PERIOD_CLAIM",
+      "warning_message": "Claim filed within the 15-day post-expiry grace period. Proof of initial symptom occurrence date required.",
+      "action_required": "Technician must inspect fault telemetry logs on digital inverter PCB to confirm fault manifested prior to expiry date."
+    },
+    {
+      "rule_id": "WRN-WM-003",
+      "rule_name": "Delayed Fault Notification",
+      "condition": "days_between_fault_and_claim > 7",
+      "warning_flag": "FLAG_DELAYED_FAULT_REPORTING",
+      "warning_message": "Fault reported after the 7-day reporting window. Assess unit for secondary consequential damage caused by delayed reporting.",
+      "action_required": "Verify that delayed operation with fault did not cause motor stator overheat or tub bearing destruction."
+    },
+    {
+      "rule_id": "WRN-WM-004",
+      "rule_name": "Missing Authorized Commissioning Slip",
+      "condition": "subcategory == 'Fully Automatic Front-Load Inverter Washing Machine' && installation_job_sheet_available == false",
+      "warning_flag": "FLAG_UNVERIFIED_COMMISSIONING",
+      "warning_message": "Front-load unit missing authorized commissioning slip. Transit bolts must be verified prior to diagnostic.",
+      "action_required": "Technician must physically confirm transit shipping bolts were properly removed and drum rotates freely."
+    },
+    {
+      "rule_id": "WRN-WM-005",
+      "rule_name": "Drain Impeller Blocked by Foreign Objects",
+      "condition": "foreign_debris_in_pump == true && pump_motor_electrically_sound == true",
+      "warning_flag": "FLAG_USER_MAINTENANCE_NEGLECT",
+      "warning_message": "Drain pump jammed by coins, hairpins, or debris. Pump motor is functional; cleaning fee applicable.",
+      "action_required": "Perform foreign object extraction; bill customer standard servicing fee while preserving electrical warranty."
+    }
+  ],
+  "manual_review_trigger_rules": [
+    {
+      "rule_id": "MRT-WM-001",
+      "rule_name": "Dead-On-Arrival Whole-Unit Replacement Claim",
+      "condition": "claim_type == 'REPLACEMENT' && days_since_purchase <= 14",
+      "trigger_reason": "DOA unit replacement requested within first 14 days of purchase.",
+      "review_department": "Regional Quality Assurance & Dealer Claims Desk",
+      "escalation_level": "Level 2 - Regional Service Manager Approval"
+    },
+    {
+      "rule_id": "MRT-WM-002",
+      "rule_name": "Third Chronic PCB/Motor Inverter Breakdown",
+      "condition": "historical_board_replacements_count >= 2 || historical_motor_replacements_count >= 2",
+      "trigger_reason": "Recurring failure of core inverter assemblies indicates systemic customer grid voltage issue or manufacturing batch defect.",
+      "review_department": "Technical Engineering Desk",
+      "escalation_level": "Level 3 - Principal Technical Director"
+    },
+    {
+      "rule_id": "MRT-WM-003",
+      "rule_name": "Parts Backorder SLA Exceeded (21+ Days)",
+      "condition": "parts_backorder_days > 21",
+      "trigger_reason": "OEM spare part (e.g. inverter control kit or drum assembly) unavailable at national warehouse exceeding 21 days.",
+      "review_department": "Supply Chain & Customer Care Escalations",
+      "escalation_level": "Level 2 - Commercial Operations Manager"
+    },
+    {
+      "rule_id": "MRT-WM-004",
+      "rule_name": "Repair Cost Approaching Replacement Value Threshold",
+      "condition": "estimated_repair_cost_pkr > (0.60 * original_purchase_price_pkr)",
+      "trigger_reason": "Cumulative repair estimate exceeds 60% of original invoice value; review for commercial replacement vs repair.",
+      "review_department": "Warranty Finance & Claims Audit",
+      "escalation_level": "Level 2 - Financial Controller"
+    },
+    {
+      "rule_id": "MRT-WM-005",
+      "rule_name": "Grid Surge Dispute with Power Utility (WAPDA/K-Electric)",
+      "condition": "technician_burn_assessment == true && customer_contests_surge == true",
+      "trigger_reason": "Customer disputes power surge assessment claiming grid stabilizer was operational during utility fault.",
+      "review_department": "Special Technical Arbitrations Unit",
+      "escalation_level": "Level 3 - Head of After-Sales Operations"
+    }
+  ]
+}

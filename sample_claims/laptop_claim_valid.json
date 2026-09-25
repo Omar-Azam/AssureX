@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-LP-2026-0042",
+  "product_category": "Laptop",
+  "subcategory": "Consumer Notebook / Everyday Laptop",
+  "serial_number": "LNV-IDEAPAD-82H8-9921",
+  "invoice_serial_number": "LNV-IDEAPAD-82H8-9921",
+  "purchase_date": "2025-05-10",
+  "fault_date": "2026-02-15",
+  "claim_date": "2026-02-18",
+  "affected_component": "system_motherboard_and_processor",
+  "fault_description": "Motherboard power rail short circuit; machine fails to power on",
+  "symptom": "Power LED blinks twice then shuts down; no fan spin",
+  "invoice_number": "INV-MERC-88319",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice (with NTN/STRN)",
+    "Official Dealer Stamped Warranty Card",
+    "Claimant National Identity Card (CNIC) Copy"
+  ],
+  "liquid_damage_detected": false,
+  "motherboard_lci_triggered": false,
+  "physical_damage": false,
+  "tamper_seal_broken": false,
+  "unauthorized_third_party_repair": false,
+  "power_surge_burn": false,
+  "prior_repairs": []
+}

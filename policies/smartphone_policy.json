@@ -1,0 +1,230 @@
+{
+  "policy_metadata": {
+    "policy_id": "POL-SP-PK-2026-V1",
+    "policy_name": "Consumer Smartphone Hardware Warranty Policy - Pakistan Region",
+    "policy_version": "1.0.0",
+    "effective_date": "2026-01-01",
+    "market_region": "Pakistan",
+    "jurisdiction": "Pakistan Telecommunication Authority (PTA) Act 1996 / Consumer Protection Acts (Punjab/Sindh/KP/ICT)",
+    "currency": "PKR"
+  },
+  "product_category": "Smartphone",
+  "applicable_subcategories": [
+    "Entry-Level 4G Smartphone",
+    "Mid-Range 5G Smartphone",
+    "Premium Flagship Smartphone",
+    "Foldable / Flip Screen Smartphone"
+  ],
+  "coverage_duration": {
+    "handset_motherboard_and_modem_months": 12,
+    "touchscreen_display_assembly_months": 12,
+    "internal_battery_months": 12,
+    "in_box_fast_charger_and_cable_months": 6,
+    "bundled_earphones_months": 3,
+    "foldable_screen_hinge_mechanism_months": 12
+  },
+  "warranty_start_conditions": {
+    "primary_trigger": "Date of retail purchase invoice from an authorized national distributor or official brand retail store",
+    "authorized_distributors": [
+      "Airlink Communications Ltd",
+      "Muller & Phipps Pakistan (M&P)",
+      "Core Technologies",
+      "Tech Sirat",
+      "Inovi Telecom",
+      "Official Brand Experience Stores"
+    ],
+    "regulatory_compliance_mandate": "Device IMEI 1 and IMEI 2 must be officially registered and tax-cleared under the Pakistan Telecommunication Authority (PTA) Device Identification, Registration and Blocking System (DIRBS). Devices with CPID patched, non-PTA approved, or cloned IMEI numbers are strictly ineligible for warranty services",
+    "prerequisites": [
+      "Computerized retail purchase invoice showing retailer NTN, purchase date, phone model, and printed IMEI 1 and 2",
+      "Official distributor warranty card bearing matching IMEI barcode sticker and retailer stamp",
+      "Official cloud device registration timestamp matching purchase date within a 30-day tolerance"
+    ]
+  },
+  "claim_reporting_period_days": 3,
+  "grace_period_days": 7,
+  "covered_faults": [
+    "Logic board (motherboard) component failures: sudden dead boot (PMIC failure, UFS memory degradation, SoC thermal detachment under non-tampered conditions)",
+    "Display and digitizer manufacturing defects: spontaneous vertical/horizontal colored lines (e.g. green/pink lines on AMOLED/OLED displays post-OTA update without physical drop/bezel stress), multi-touch dead zones, or persistent ghost touch",
+    "Camera module hardware failure: optical image stabilization (OIS) actuator oscillation chatter, autofocus voice coil motor (VCM) seizure, or internal sensor image banding (excluding external lens scratch/laser burn)",
+    "Charging sub-board and USB-C port failure: pin solder detachment or fast-charge handshake failure under dry, corrosion-free conditions",
+    "Acoustic transducer failures: internal ear speaker, loudspeaker, or MEMS microphone audio codec IC failure",
+    "Cellular baseband failure: persistent 'No Service' or invalid SIM error where SIM slot is undamaged and PTA registration is verified",
+    "Battery hardware failure: severe pouch swelling/bloating separating the back cover, sudden shutdown at battery levels exceeding 20%, or thermal battery warning preventing charge",
+    "Foldable / Flip screen mechanical hinge creaking, tension spring disengagement, or Ultra-Thin Glass (UTG) stress crease delamination under standard opening limits"
+  ],
+  "exclusions": [
+    "Non-PTA compliant devices, grey market parallel imports, or handsets with modified, patched, or duplicated IMEI numbers (CPID patch, root patch, cloned feature phone IMEI)",
+    "Liquid, moisture, or chemical ingress: verified by triggered internal or SIM-tray Liquid Damage Indicator (LDI) turning pink or red, or visible corrosion on FPC flex connectors",
+    "Physical impact and accidental damage: shattered front cover glass, fractured back glass panel, dented or bent aluminum/titanium frame, display ink bleed / black pooling / internal AMOLED puncture beneath unbroken glass",
+    "Unauthorized operating system modifications: unlocked bootloader, custom ROM, rooted Android kernel (e.g. Knox counter trip 0x1, Magisk root, unverified test-keys build)",
+    "Unauthorized repair or parts substitution: non-original aftermarket replacement screen (e.g. cheap TFT/incell screen fitted in place of original OLED), missing internal shielding brackets, or work performed at local repair markets (Hall Road Lahore, Techno City Karachi, Saddar Karachi, Singapore Plaza Rawalpindi)",
+    "Severe OLED burn-in or permanent static image retention caused by operating continuously at 100% manual brightness on static icons for over 8 consecutive hours",
+    "Sub-board or battery burnout caused by charging via counterfeit non-certified fast chargers (e.g. uncertified 67W/120W clone adapters) or unstable direct DC vehicular supplies",
+    "Surface cosmetic abrasions, minor micro-scratches on protective display film, frame paint chipping, or lens cover scuffs resulting from regular pocket/bag friction"
+  ],
+  "repair_conditions": {
+    "front_desk_diagnostic_sla_hours": 4,
+    "standard_turnaround_time_days": 3,
+    "spare_parts_origin": "100% Genuine OEM factory-sealed replacement modules supplied directly by brand regional spare parts hubs",
+    "dust_free_bench_standard": "Screen and logic board replacements are performed exclusively inside ESD-controlled, Class 1000 dust-free clean benches utilizing factory hot-press jig machines to re-establish IP67/IP68 water resistance gaskets",
+    "data_sanitization_mandate": "Diagnostic firmware flashing and motherboard replacement necessitate complete device wiping. Customer must back up personal data, media, and chat histories prior to handover",
+    "security_locks_requirement": "Customer must remove Google Account (FRP), Apple ID, Samsung Account, Xiaomi/Mi Account, and lock screen passcodes before device check-in",
+    "warranty_on_replaced_parts_days": 90,
+    "repaired_parts_post_warranty_policy": "Replaced modular components carry a 90-day warranty or the remaining unexpired manufacturer warranty, whichever is greater"
+  },
+  "authorized_service_centre_requirement": {
+    "mandate": "Warranty services are administered exclusively through official brand customer care centers and certified franchise service networks across Pakistan",
+    "intake_inspection": "Mandatory microscopic 10x inspection of display bezel, SIM tray LDI, and USB-C port pins during check-in; photographic proof logged to digital warranty portal",
+    "unauthorized_access_penalty": "Any missing internal grounding bracket screws, non-original adhesive pull tabs, or third-party technician markings result in immediate and permanent voiding of warranty status"
+  },
+  "replacement_conditions": {
+    "doa_period_days": 7,
+    "doa_conditions": "Dead on Arrival (DOA) replacement authorized within 7 calendar days from invoice purchase date if verified by ASC Lead Engineer to exhibit unrepairable hardware defect, zero cosmetic scratches on glass/housing, and complete retail box with matching serial IMEI sticker",
+    "unresolved_repeat_failure_threshold": 3,
+    "unresolved_repeat_failure_condition": "Failure of the core logic board occurring 3 consecutive times within 90 days of previous repairs",
+    "parts_backorder_sla_days": 21,
+    "parts_backorder_condition": "Failure of national parts depot to provide required replacement assembly within 21 calendar days from job card issuance",
+    "replacement_tier": "Brand-new sealed handset of the identical model, color, and storage configuration, or superseding equivalent model if the original SKU is out of production"
+  },
+  "mandatory_documents": [
+    "Original Retail Purchase Invoice detailing customer name, purchase date, phone model, IMEI 1 & IMEI 2, and retailer NTN/STRN",
+    "Original National Distributor Warranty Card (Airlink, M&P, Core, etc.) with matching IMEI barcode sticker",
+    "PTA DIRBS 8484 verification confirmation SMS or official PTA online portal verification slip showing valid tax-paid status for both IMEIs",
+    "Original CNIC copy of the purchasing customer matching invoice name"
+  ],
+  "hard_fail_rules": [
+    {
+      "rule_id": "HF-SP-001",
+      "rule_name": "Non-PTA Compliant or Cloned/Patched IMEI",
+      "condition": "pta_dirbs_verified == false || cpid_patched_imei == true || imei_dual_sim_mismatch == true",
+      "resulting_class": "REJECTED_ILLEGAL_NON_PTA_OR_CLONED_IMEI",
+      "description": "Device is not PTA compliant or exhibits patched/cloned IMEI; violating Pakistani telecommunication laws. Claim strictly rejected."
+    },
+    {
+      "rule_id": "HF-SP-002",
+      "rule_name": "Liquid Damage Indicator (LDI) Activated",
+      "condition": "sim_tray_ldi_triggered == true || internal_motherboard_ldi_triggered == true || usb_port_corroded == true",
+      "resulting_class": "REJECTED_LIQUID_INGRESS",
+      "description": "Internal or external liquid contact indicator turned red/pink or active corrosion present; liquid damage excludes all warranty coverage."
+    },
+    {
+      "rule_id": "HF-SP-003",
+      "rule_name": "Unauthorized Third-Party Part Substitution",
+      "condition": "aftermarket_screen_detected == true || missing_internal_shielding_screws == true || unauthorized_bazaar_seal == true",
+      "resulting_class": "REJECTED_UNAUTHORIZED_PARTS_SWAP",
+      "description": "Device contains non-OEM replacement parts (e.g. aftermarket screen) or exhibits third-party local repair shop intervention."
+    },
+    {
+      "rule_id": "HF-SP-004",
+      "rule_name": "Accidental Physical Impact or Display Bleed",
+      "condition": "screen_glass_shattered == true || frame_bent == true || oled_internal_ink_bleed == true",
+      "resulting_class": "REJECTED_PHYSICAL_IMPACT",
+      "description": "Cracked cover glass, bent frame, or internal OLED matrix bleeding resulting from drop impact or external force."
+    },
+    {
+      "rule_id": "HF-SP-005",
+      "rule_name": "System Software Tampering / Bootloader Unlock",
+      "condition": "bootloader_unlocked == true || root_binary_present == true || knox_tripped_0x1 == true",
+      "resulting_class": "REJECTED_FIRMWARE_TAMPERING",
+      "description": "System integrity compromised via bootloader unlocking, custom ROM installation, or root manipulation."
+    },
+    {
+      "rule_id": "HF-SP-006",
+      "rule_name": "Warranty Expired Past Grace Allowance",
+      "condition": "days_since_warranty_expiry > 7",
+      "resulting_class": "REJECTED_EXPIRED_WARRANTY",
+      "description": "Claim lodged more than 7 calendar days following expiration of the standard 365-day warranty period."
+    },
+    {
+      "rule_id": "HF-SP-007",
+      "rule_name": "Counterfeit Charger Port Burnout",
+      "condition": "charging_ic_blown_overvoltage == true && non_certified_charger_used == true",
+      "resulting_class": "REJECTED_UNAUTHORIZED_CHARGING_EQUIPMENT",
+      "description": "Charging sub-board and PMIC destruction caused by non-certified counterfeit high-wattage clone fast chargers."
+    }
+  ],
+  "warning_rules": [
+    {
+      "rule_id": "WRN-SP-001",
+      "rule_name": "Spontaneous OLED Line Following Official OTA Update",
+      "condition": "vertical_green_or_pink_line_present == true && glass_undamaged == true && frame_undamaged == true && ota_update_within_14_days == true",
+      "warning_flag": "FLAG_POTENTIAL_OTA_PANEL_RECALL_PROGRAM",
+      "warning_message": "Single vertical OLED line manifested after official OTA firmware update without physical impact. Screen replacement may qualify for special brand subsidy.",
+      "action_required": "Escalate to brand technical desk for manufacturer goodwill screen replacement program authorization."
+    },
+    {
+      "rule_id": "WRN-SP-002",
+      "rule_name": "Battery Approaching Chemical Depreciation Range",
+      "condition": "battery_cycle_count > 400 || (battery_health_percentage >= 80 && battery_health_percentage <= 83)",
+      "warning_flag": "FLAG_NORMAL_BATTERY_DEGRADATION",
+      "warning_message": "Battery health is slightly above the 80% replacement threshold with over 400 charge cycles, indicating standard electrochemical aging.",
+      "action_required": "Notify customer that battery meets nominal operating performance standards; replacement is currently billable unless health drops below 80% within 12 months."
+    },
+    {
+      "rule_id": "WRN-SP-003",
+      "rule_name": "Active Cloud Anti-Theft / FRP Lock Engaged",
+      "condition": "google_frp_locked == true || mi_cloud_locked == true || apple_id_locked == true",
+      "warning_flag": "FLAG_SECURITY_LOCK_ACTIVE",
+      "warning_message": "Device submitted with active cloud security lock. Factory diagnostic tools cannot initialize.",
+      "action_required": "Contact claimant immediately to remove cloud anti-theft bindings remotely or provide registered proof of ownership credentials."
+    },
+    {
+      "rule_id": "WRN-SP-004",
+      "rule_name": "Delayed Hardware Fault Submission",
+      "condition": "days_between_fault_and_claim > 3",
+      "warning_flag": "FLAG_CLAIM_REPORTING_DELAY",
+      "warning_message": "Defect reported after the mandatory 3-day window. Perform high-magnification inspection to confirm absence of subsequent drop trauma.",
+      "action_required": "Verify internal accelerometer crash telemetry logs to ensure no drop events occurred between symptom onset and service submission."
+    },
+    {
+      "rule_id": "WRN-SP-005",
+      "rule_name": "Cosmetic Oleophobic Wear and Surface Micro-Scratches",
+      "condition": "display_surface_scratched == true && panel_digitizer_operational == true",
+      "warning_flag": "FLAG_COSMETIC_BLEMISH_EXCLUSION",
+      "warning_message": "Display exhibits surface micro-scratches from pocket grit. Cosmetic wear is excluded from coverage.",
+      "action_required": "Advise customer that screen replacement for cosmetic scratches is purely customer-paid."
+    }
+  ],
+  "manual_review_trigger_rules": [
+    {
+      "rule_id": "MRT-SP-001",
+      "rule_name": "Dead-On-Arrival (DOA) Handset Swap Claim",
+      "condition": "claim_type == 'REPLACEMENT' && days_since_purchase <= 7",
+      "trigger_reason": "Customer requests immediate brand-new DOA handset replacement within 7 calendar days of retail purchase.",
+      "review_department": "Distributor Claims & Brand Experience Desk",
+      "escalation_level": "Level 2 - Regional Customer Care Manager"
+    },
+    {
+      "rule_id": "MRT-SP-002",
+      "rule_name": "Third Catastrophic Motherboard Dead-Boot Failure",
+      "condition": "historical_motherboard_replacements_count >= 2",
+      "trigger_reason": "Handset has undergone two prior motherboard replacements and failed a third time; review for complete handset replacement.",
+      "review_department": "Technical Quality Assurance Cell",
+      "escalation_level": "Level 3 - Principal Technical Director"
+    },
+    {
+      "rule_id": "MRT-SP-003",
+      "rule_name": "Service Center SLA Breach (21+ Days Parts Delay)",
+      "condition": "parts_backorder_days > 21",
+      "trigger_reason": "Authorized service center unable to source genuine display or logic board within 21 calendar days of check-in.",
+      "review_department": "Supply Chain Logistics & Operations Desk",
+      "escalation_level": "Level 2 - Country After-Sales Operations Head"
+    },
+    {
+      "rule_id": "MRT-SP-004",
+      "rule_name": "Contested Spontaneous Green Line with Microscopic Bezel Scuff",
+      "condition": "vertical_green_or_pink_line_present == true && microscopic_bezel_nick == true && customer_appeals_decision == true",
+      "trigger_reason": "Customer contests rejection where technician cited minor frame scuff as cause of spontaneous AMOLED line failure.",
+      "review_department": "Technical Arbitrations & Goodwill Committee",
+      "escalation_level": "Level 3 - Chief Customer Ombudsman"
+    },
+    {
+      "rule_id": "MRT-SP-005",
+      "rule_name": "Retail Channel Date Discrepancy / Suspected Stale Stock",
+      "condition": "days_between_first_network_activation_and_invoice > 45",
+      "trigger_reason": "Device was first activated on cellular network more than 45 days prior to invoice date; suspected open-box resale or dealer stock recycling.",
+      "review_department": "Channel Compliance & Anti-Fraud Unit",
+      "escalation_level": "Level 3 - Commercial Audits Director"
+    }
+  ]
+}

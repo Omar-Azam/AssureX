@@ -1,0 +1,227 @@
+{
+  "policy_metadata": {
+    "policy_id": "POL-LP-PK-2026-V1",
+    "policy_name": "Consumer Laptop Hardware Warranty Policy - Pakistan Region",
+    "policy_version": "1.0.0",
+    "effective_date": "2026-01-01",
+    "market_region": "Pakistan",
+    "jurisdiction": "Consumer Protection Acts (Punjab/Sindh/KP/ICT) & Commercial Code of Pakistan",
+    "currency": "PKR"
+  },
+  "product_category": "Laptop",
+  "applicable_subcategories": [
+    "Consumer Notebook / Everyday Laptop",
+    "Ultraportable / Thin & Light Ultrabook",
+    "High-Performance Gaming Laptop",
+    "Creator / Mobile Workstation"
+  ],
+  "coverage_duration": {
+    "system_motherboard_and_processor_months": 24,
+    "display_panel_and_hinge_mechanism_months": 12,
+    "battery_pack_health_months": 12,
+    "bundled_power_adapter_charger_months": 12,
+    "keyboard_and_precision_touchpad_months": 12,
+    "factory_ssd_and_ram_modules_months": 24,
+    "cooling_fans_and_heatsink_assembly_months": 12
+  },
+  "warranty_start_conditions": {
+    "primary_trigger": "Date of retail tax invoice from an authorized tier-1 national IT distribution partner or brand flagship store",
+    "authorized_distributors": [
+      "Mercantile Pakistan",
+      "Mega Business Solutions",
+      "Core Technologies",
+      "Muller & Phipps Pakistan (M&P)",
+      "Official Brand Retail Outlets"
+    ],
+    "verification_mechanism": "Laptop BIOS Serial Number and Motherboard UUID must match the authorized Pakistani territory distribution database. Grey market imports, US/Dubai un-taxed channel lots, or container refurbished units without local distributor warranty cards are strictly invalid",
+    "prerequisites": [
+      "Valid computerized retail sales tax invoice with dealer NTN/STRN and matching serial number",
+      "Official regional distributor warranty card with intact security hologram sticker",
+      "Initial OS activation date on global OEM telemetry servers within 45 days of retail invoice date"
+    ]
+  },
+  "claim_reporting_period_days": 5,
+  "grace_period_days": 10,
+  "covered_faults": [
+    "Motherboard circuit failure (MOSFET short, power delivery IC failure, embedded controller EC lockup, PCH/chipset malfunction under normal operational load)",
+    "Dedicated GPU / VRAM solder fatigue, visual artifacting, or 3D graphics rendering crash under standard thermal envelope",
+    "Factory LCD/OLED panel manufacturing defects: persistent vertical/horizontal display lines, backlight failure, or dead pixel clusters exceeding ISO 9241-307 Class II threshold (minimum 5 dead/stuck bright pixels)",
+    "Internal cooling fan bearing seizure, blade detachment, or fan tachometer RPM read error causing thermal safety shutdown",
+    "Integrated keyboard matrix failure: non-responsive key rows, stuck membrane traces, or backlight failure (excluding liquid spillage)",
+    "Battery health capacity dropping below 70% of design capacity (mWh) within 300 charge cycles during the initial 12-month period, or internal battery thermal cutoff sensor tripping",
+    "Factory-installed NVMe SSD controller read-only lockup, firmware crash, or uncorrectable bad sector degradation exceeding SMART threshold"
+  ],
+  "exclusions": [
+    "Liquid spillage or moisture ingress (tea, coffee, soft drinks, water, high ambient condensation) confirmed by internal red/pink Liquid Contact Indicators (LCIs) on motherboard, keyboard tray, or chassis",
+    "Physical impact and accidental damage: shattered display panel, dented magnesium/aluminum lid, cracked hinges caused by drops, twisted chassis, or port pin damage (mangled USB-C, cracked HDMI port)",
+    "Hinge structure tear-out or cracked screw standoffs resulting from forced angular over-extension or blunt impact",
+    "Burnt motherboard charging circuitry, melted DC-in jacks, or blown power rails caused by non-OEM counterfeit chargers, ungrounded third-party power banks, or raw generator voltage surges during load-shedding switchover",
+    "Punctured or broken factory warranty void stickers (e.g. seals covering heatsink retention screws or motherboard chassis fasteners)",
+    "Unauthorized third-party motherboard chip-level repair, BGA reflow/reballing, jumper wire bypass, or EEPROM flashing via external programmers (e.g. CH341A) carried out at local computer markets (Hafeez Centre Lahore, Techno City Karachi, Singapore Plaza Rawalpindi)",
+    "Software corruption, operating system crash, virus/malware infection, pirated Windows activations, or customer-induced BIOS supervisor passwords / BitLocker key loss",
+    "Normal cosmetic wear: keyboard keycap gloss/sheen, paint peeling on palm rest, scratches on top lid, or rubber foot pad detachment"
+  ],
+  "repair_conditions": {
+    "diagnostic_sla_hours": 72,
+    "standard_turnaround_time_days": 7,
+    "spare_parts_origin": "100% Genuine OEM Field Replaceable Unit (FRU) parts shipped from regional Asian parts depots",
+    "customer_data_disclaimer": "Customer is solely responsible for backing up all personal data, operating system drives, and work files prior to service check-in. The service center accepts zero liability for data loss resulting from diagnostic re-imaging, motherboard replacement, or drive format",
+    "warranty_on_replaced_parts_days": 90,
+    "repaired_parts_post_warranty_policy": "Replaced hardware modules retain 90 days warranty or the unexpired remainder of the original laptop warranty, whichever is longer"
+  },
+  "authorized_service_centre_requirement": {
+    "mandate": "Diagnostic and repair operations must be conducted exclusively by Authorized Service Provider (ASP) bench technicians equipped with ESD-safe grounded workstations",
+    "customer_upgrade_policy": "Customer RAM and secondary M.2 SSD storage upgrades are permitted ONLY if executed without puncturing the heatsink warranty sticker or damaging internal chassis retention clips. Any damage sustained during user upgrade voids chassis and motherboard warranty",
+    "intake_inspection": "Mandatory bench intake inspection requires photography of all four chassis corners, screen bezel, and hinge alignment to document pre-existing cosmetic condition"
+  },
+  "replacement_conditions": {
+    "doa_period_days": 7,
+    "doa_conditions": "Dead on Arrival (DOA) replacement authorized within 7 calendar days of purchase invoice if technical evaluation confirms catastrophic motherboard dead boot or defective display panel, accompanied by complete original retail packaging, inner styrofoam, and intact accessories",
+    "unresolved_repeat_failure_threshold": 3,
+    "unresolved_repeat_failure_condition": "Failure of the system motherboard occurring 3 consecutive times within the active warranty period with identical or related root-cause defects",
+    "parts_backorder_sla_days": 25,
+    "parts_backorder_condition": "Inability to procure required OEM replacement FRU assemblies (motherboard or display panel) within 25 business days from service job card creation",
+    "replacement_tier": "Exact identical model SKU, or current equivalent model with matching processor class, RAM, and dedicated GPU specifications upon customer concurrence"
+  },
+  "mandatory_documents": [
+    "Original Computerized Sales Tax Invoice indicating Customer Name, Date, Laptop Model Number, Serial Number, and Vendor NTN/STRN",
+    "Original Regional IT Distributor Warranty Card bearing holographic anti-counterfeit security seal",
+    "Government-issued Computerized National Identity Card (CNIC) or Passport copy of the claimant matching invoice details",
+    "Original bundled factory AC power adapter with matching OEM part number and serial label"
+  ],
+  "hard_fail_rules": [
+    {
+      "rule_id": "HF-LP-001",
+      "rule_name": "Liquid Damage Indicator (LCI) Triggered",
+      "condition": "motherboard_lci_triggered == true || keyboard_tray_lci_triggered == true || liquid_residue_corrosion == true",
+      "resulting_class": "REJECTED_LIQUID_DAMAGE",
+      "description": "Internal liquid contact indicators turned red/pink, or liquid corrosion observed on circuit components; full warranty void."
+    },
+    {
+      "rule_id": "HF-LP-002",
+      "rule_name": "Tampered Warranty Seal or Heatsink Breach",
+      "condition": "warranty_void_sticker_punctured == true || heatsink_tamper_seal_broken == true",
+      "resulting_class": "REJECTED_TAMPERED_SEAL",
+      "description": "Factory warranty void sticker covering motherboard/heatsink retention screws has been punctured, peeled, or missing."
+    },
+    {
+      "rule_id": "HF-LP-003",
+      "rule_name": "Unauthorized Local Market Board Repair",
+      "condition": "unauthorized_bga_rework == true || jumper_wire_present == true || third_party_soldering == true",
+      "resulting_class": "REJECTED_UNAUTHORIZED_MODIFICATION",
+      "description": "Evidence of unauthorized motherboard soldering, BGA chip rework, or jumper modification performed at local markets."
+    },
+    {
+      "rule_id": "HF-LP-004",
+      "rule_name": "Accidental Impact and Physical Screen Fracture",
+      "condition": "lcd_cracked == true || chassis_bent == true || hinge_mount_torn_by_impact == true",
+      "resulting_class": "REJECTED_ACCIDENTAL_PHYSICAL_DAMAGE",
+      "description": "Shattered display matrix, impact-dented chassis, or sheared hinge structures resulting from drops or excessive mechanical force."
+    },
+    {
+      "rule_id": "HF-LP-005",
+      "rule_name": "Grey Market / Unofficial Channel Import",
+      "condition": "serial_number_in_official_pk_db == false || non_distributor_parallel_import == true",
+      "resulting_class": "REJECTED_NON_OFFICIAL_CHANNEL",
+      "description": "Laptop serial number is not registered with official Pakistani distributor channels (Mercantile/Mega/Core); grey market import."
+    },
+    {
+      "rule_id": "HF-LP-006",
+      "rule_name": "Warranty Expired Past Grace Period",
+      "condition": "days_since_warranty_expiry > 10",
+      "resulting_class": "REJECTED_EXPIRED_WARRANTY",
+      "description": "Claim lodged more than 10 calendar days after expiration of the comprehensive motherboard warranty duration."
+    },
+    {
+      "rule_id": "HF-LP-007",
+      "rule_name": "Burnt Circuitry from Non-OEM Charger or Raw Generator Surge",
+      "condition": "power_rail_surge_burn == true && (non_oem_adapter_used == true || ungrounded_supply_detected == true)",
+      "resulting_class": "REJECTED_NON_COMPLIANT_CHARGER_SURGE",
+      "description": "Burnt DC-in controller caused by connecting counterfeit uncertified chargers or direct ungrounded generator switchovers."
+    }
+  ],
+  "warning_rules": [
+    {
+      "rule_id": "WRN-LP-001",
+      "rule_name": "Severe Thermal Dust Clogging and Paste Desiccation",
+      "condition": "heatsink_fin_dust_blocked == true || delta_temp_celsius > 45",
+      "warning_flag": "FLAG_THERMAL_MAINTENANCE_REQUIRED",
+      "warning_message": "Heatsink fins clogged by ambient dust and hair lint causing thermal throttling. Internal thermal service required.",
+      "action_required": "Perform authorized ultrasonic fin cleaning and repaste with OEM thermal compound; billable standard servicing."
+    },
+    {
+      "rule_id": "WRN-LP-002",
+      "rule_name": "Battery Approaching Normal Wear Threshold",
+      "condition": "battery_cycle_count > 300 || (battery_health_percentage >= 70 && battery_health_percentage <= 75)",
+      "warning_flag": "FLAG_BATTERY_WEAR_WARNING",
+      "warning_message": "Battery capacity is between 70% and 75% with elevated cycle count (>300 cycles), approaching expected chemical wear.",
+      "action_required": "Advise customer that battery remains within acceptable operating parameters; re-test if drops below 70% prior to 12 months."
+    },
+    {
+      "rule_id": "WRN-LP-003",
+      "rule_name": "Delayed Hardware Defect Submission",
+      "condition": "days_between_fault_and_claim > 5",
+      "warning_flag": "FLAG_DELAYED_REPORTING",
+      "warning_message": "Claim submitted more than 5 business days after symptom onset. Inspect for progressive collateral stress.",
+      "action_required": "Inspect adjacent power phases and thermal pads to ensure delayed reporting did not cause secondary VRM failure."
+    },
+    {
+      "rule_id": "WRN-LP-004",
+      "rule_name": "Sub-Threshold Dead Pixel Count",
+      "condition": "dead_pixel_count > 0 && dead_pixel_count < 5",
+      "warning_flag": "FLAG_SUB_THRESHOLD_PIXEL_ANOMALY",
+      "warning_message": "Display exhibits isolated dead/stuck pixels below the mandatory ISO 9241-307 Class II replacement threshold (< 5 pixels).",
+      "action_required": "Document pixel coordinates on job card. Screen replacement not authorized unless defect cluster expands to 5+ pixels."
+    },
+    {
+      "rule_id": "WRN-LP-005",
+      "rule_name": "User-Installed Aftermarket RAM or Storage",
+      "condition": "user_installed_ram_or_ssd == true && motherboard_undamaged == true",
+      "warning_flag": "FLAG_USER_UPGRADED_COMPONENT",
+      "warning_message": "Third-party RAM or secondary SSD detected. Upgrade was executed cleanly without motherboard or clip damage.",
+      "action_required": "Note non-OEM module serial numbers on job sheet; test system using factory reference memory modules."
+    }
+  ],
+  "manual_review_trigger_rules": [
+    {
+      "rule_id": "MRT-LP-001",
+      "rule_name": "Dead-On-Arrival (DOA) Unit Replacement Verification",
+      "condition": "claim_type == 'REPLACEMENT' && days_since_purchase <= 7",
+      "trigger_reason": "DOA complete replacement claim within 7 calendar days of retail invoice date.",
+      "review_department": "Distributor Claims & Brand Operations Desk",
+      "escalation_level": "Level 2 - Country After-Sales Operations Lead"
+    },
+    {
+      "rule_id": "MRT-LP-002",
+      "rule_name": "Chronic Second Motherboard Failure within 90 Days",
+      "condition": "historical_motherboard_replacements_count >= 1 && days_since_last_board_repair <= 90",
+      "trigger_reason": "Subsequent motherboard replacement required within 90 days indicates chronic chassis grounding or cooling defect.",
+      "review_department": "Senior Diagnostic Engineering Group",
+      "escalation_level": "Level 3 - Principal Hardware Solutions Architect"
+    },
+    {
+      "rule_id": "MRT-LP-003",
+      "rule_name": "International Spare Part Backorder Exceeding 25 Business Days",
+      "condition": "parts_backorder_days > 25",
+      "trigger_reason": "Critical replacement assembly (motherboard/OLED panel) delayed beyond 25 business days at customs/depot.",
+      "review_department": "Customer Relations & Supply Chain Management",
+      "escalation_level": "Level 2 - Regional Service Operations Manager"
+    },
+    {
+      "rule_id": "MRT-LP-004",
+      "rule_name": "Repair Cost Exceeding 70% Depreciated Value",
+      "condition": "estimated_repair_cost_pkr > (0.70 * current_depreciated_market_value_pkr)",
+      "trigger_reason": "Combined estimate for display panel and motherboard replacement exceeds 70% of device market value; evaluate replacement.",
+      "review_department": "Warranty Audit & Commercial Finance",
+      "escalation_level": "Level 2 - Finance Manager"
+    },
+    {
+      "rule_id": "MRT-LP-005",
+      "rule_name": "Customer-Reported BIOS Lock / Security Tampering",
+      "condition": "bios_locked_with_password == true || bitlocker_recovery_lockout == true",
+      "trigger_reason": "Motherboard locked with unknown BIOS supervisor password; customer claims no password was ever configured.",
+      "review_department": "Security Audit & Fraud Prevention Unit",
+      "escalation_level": "Level 3 - Head of Information Security & Compliance"
+    }
+  ]
+}
