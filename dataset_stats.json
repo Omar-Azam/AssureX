@@ -1,0 +1,168 @@
+{
+  "dataset_metadata": {
+    "title": "AssureX Consumer Electronics Warranty Claims Classification Dataset",
+    "total_records": 1500,
+    "generation_seed": 42,
+    "fields_count": 26,
+    "fields_list": [
+      "claim_id",
+      "user_id",
+      "product_id",
+      "product_category",
+      "product_name",
+      "brand",
+      "model_number",
+      "serial_number",
+      "purchase_date",
+      "purchase_price",
+      "retailer",
+      "warranty_duration_months",
+      "warranty_start_date",
+      "warranty_expiry_date",
+      "fault_occurrence_date",
+      "fault_description",
+      "damage_type",
+      "claim_submission_date",
+      "repair_history",
+      "has_receipt",
+      "has_warranty_card",
+      "has_product_image",
+      "has_serial_evidence",
+      "serial_number_on_receipt",
+      "prior_replacement",
+      "class_label"
+    ],
+    "target_classes": [
+      "Valid Claim",
+      "Invalid Claim",
+      "Manual Review"
+    ],
+    "overall_class_balance": {
+      "Manual Review": 500,
+      "Valid Claim": 500,
+      "Invalid Claim": 500
+    }
+  },
+  "noise_injection_summary": {
+    "target_noise_ratio": 0.1,
+    "total_noisy_records": 139,
+    "noisy_records_per_class": {
+      "Valid Claim": 47,
+      "Invalid Claim": 42,
+      "Manual Review": 50
+    },
+    "noise_types_sample": [
+      {
+        "claim_id": "CLM-2026-00013",
+        "class": "Valid Claim",
+        "noise": "Valid: Missing In-App Photo (Direct In-Store Dropoff)"
+      },
+      {
+        "claim_id": "CLM-2026-00017",
+        "class": "Valid Claim",
+        "noise": "Valid: Serial Barcode String Trailing Whitespace"
+      },
+      {
+        "claim_id": "CLM-2026-00018",
+        "class": "Valid Claim",
+        "noise": "Valid: Missing In-App Photo (Direct In-Store Dropoff)"
+      },
+      {
+        "claim_id": "CLM-2026-00048",
+        "class": "Valid Claim",
+        "noise": "Valid: Clerical Date Misalignment (Submission recorded prior to Fault)"
+      },
+      {
+        "claim_id": "CLM-2026-00064",
+        "class": "Valid Claim",
+        "noise": "Valid: Clerical Date Misalignment (Submission recorded prior to Fault)"
+      },
+      {
+        "claim_id": "CLM-2026-00065",
+        "class": "Valid Claim",
+        "noise": "Valid: Serial Barcode String Trailing Whitespace"
+      },
+      {
+        "claim_id": "CLM-2026-00095",
+        "class": "Valid Claim",
+        "noise": "Valid: Clerical Date Misalignment (Submission recorded prior to Fault)"
+      },
+      {
+        "claim_id": "CLM-2026-00122",
+        "class": "Valid Claim",
+        "noise": "Valid: Serial Barcode String Trailing Whitespace"
+      },
+      {
+        "claim_id": "CLM-2026-00131",
+        "class": "Valid Claim",
+        "noise": "Valid: Clerical Date Misalignment (Submission recorded prior to Fault)"
+      },
+      {
+        "claim_id": "CLM-2026-00135",
+        "class": "Valid Claim",
+        "noise": "Valid: Missing In-App Photo (Direct In-Store Dropoff)"
+      }
+    ]
+  },
+  "splits": {
+    "train": {
+      "split_name": "train",
+      "record_count": 1050,
+      "class_balance": {
+        "Manual Review": 350,
+        "Invalid Claim": 350,
+        "Valid Claim": 350
+      },
+      "missing_value_counts": {
+        "retailer": 9,
+        "serial_number_on_receipt": 75
+      },
+      "product_categories": {
+        "Laptop": 218,
+        "Smartphone": 215,
+        "Washing Machine": 212,
+        "Audio / Soundbar": 210,
+        "Smart TV": 195
+      }
+    },
+    "val": {
+      "split_name": "val",
+      "record_count": 225,
+      "class_balance": {
+        "Invalid Claim": 75,
+        "Valid Claim": 75,
+        "Manual Review": 75
+      },
+      "missing_value_counts": {
+        "serial_number_on_receipt": 17
+      },
+      "product_categories": {
+        "Audio / Soundbar": 58,
+        "Smart TV": 50,
+        "Washing Machine": 43,
+        "Laptop": 37,
+        "Smartphone": 37
+      }
+    },
+    "test": {
+      "split_name": "test",
+      "record_count": 225,
+      "class_balance": {
+        "Invalid Claim": 75,
+        "Valid Claim": 75,
+        "Manual Review": 75
+      },
+      "missing_value_counts": {
+        "retailer": 3,
+        "serial_number_on_receipt": 16
+      },
+      "product_categories": {
+        "Audio / Soundbar": 55,
+        "Washing Machine": 46,
+        "Laptop": 44,
+        "Smartphone": 42,
+        "Smart TV": 38
+      }
+    }
+  }
+}
