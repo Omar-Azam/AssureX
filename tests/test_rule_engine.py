@@ -3,6 +3,8 @@ Unit Tests for AssureX Warranty Rule Engine
 """
 
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import unittest
 from src.rule_engine import WarrantyRuleEngine, evaluate_claim
 

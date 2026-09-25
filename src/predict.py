@@ -1,0 +1,25 @@
+"""
+AssureX Inference Bridge
+========================
+Provides access to `predict_with_confidence(claim_record)` from within `src/`.
+"""
+
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from predict_with_confidence import (
+    predict_with_confidence,
+    load_artifacts,
+    transform_raw_claim_to_features
+)
+
+__all__ = [
+    "predict_with_confidence",
+    "load_artifacts",
+    "transform_raw_claim_to_features"
+]
