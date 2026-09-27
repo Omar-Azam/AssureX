@@ -29,6 +29,7 @@ import re
 import argparse
 import pandas as pd
 import numpy as np
+from claim_metrics import compute_claim_metrics, parse_date
 
 
 def find_data_file(filename: str, dataset_dir: str = "dataset") -> str:
@@ -61,11 +62,13 @@ def compute_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     dt_expiry = pd.to_datetime(df['warranty_expiry_date'], errors='coerce')
     dt_claim = pd.to_datetime(df['claim_submission_date'], errors='coerce')
 
-    # 1. product_age_days: purchase_date to claim_submission_date
-    df['product_age_days'] = (dt_claim - dt_purchase).dt.days
-
-    # 2. remaining_warranty_days: warranty_expiry_date - fault_occurrence_date
-    df['remaining_warranty_days'] = (dt_expiry - dt_fault).dt.days
+    # 1 & 2: Canonical product_age_days and remaining_warranty_days (sole single source of truth)
+    metrics_list = [
+        compute_claim_metrics(row['purchase_date'], row['claim_submission_date'], row['warranty_duration_months'])
+        for _, row in df.iterrows()
+    ]
+    df['product_age_days'] = [m.product_age_days for m in metrics_list]
+    df['remaining_warranty_days'] = [m.remaining_warranty_days for m in metrics_list]
 
     # 3. missing_document_count
     doc_flags = ['has_receipt', 'has_warranty_card', 'has_product_image', 'has_serial_evidence']

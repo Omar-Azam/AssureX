@@ -1,0 +1,49 @@
+{
+  "claim_id": "CLM-2026-DEMO-006",
+  "product_category": "Laptop",
+  "subcategory": "Consumer Notebook / Everyday Laptop",
+  "brand": "HP",
+  "model_name": "Pavilion 15-eg3000",
+  "model_number": "15-EG3025TX",
+  "serial_number": "HP-PAV-15-77291-KHI",
+  "invoice_serial_number": "HP-PAV-15-77291-KHI",
+  "purchase_price": 165000.0,
+  "retailer": "UniCenter Computer Market Karachi",
+  "purchase_date": "2025-07-10",
+  "warranty_duration_months": 12,
+  "fault_date": "2026-01-20",
+  "claim_date": "2026-02-15",
+  "affected_component": "system_motherboard_and_processor",
+  "damage_type": "Motherboard Power Circuit Failure",
+  "fault_description": "Motherboard fails to boot, diagnostic amber light blinks 3 times",
+  "symptom": "No display, fan at max speed",
+  "invoice_number": "INV-HP-99120",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice",
+    "Dealer Stamped Warranty Card",
+    "CNIC Copy"
+  ],
+  "liquid_damage_detected": false,
+  "physical_damage": false,
+  "tamper_seal_broken": false,
+  "unauthorized_third_party_repair": false,
+  "prior_repairs": [],
+  "prior_replacement": false,
+  "prior_claims_history": [
+    {
+      "claim_id": "CLM-2026-00042",
+      "serial_number": "HP-PAV-15-77291-KHI",
+      "claim_date": "2026-01-22",
+      "affected_component": "system_motherboard_and_processor",
+      "status": "In Review",
+      "outcome": "Pending Resolution"
+    }
+  ],
+  "expected_decision": "Manual Review Required",
+  "expected_failed_rules": ["NO_DUPLICATE_CLAIM"],
+  "duplicate_flag": true,
+  "duplicate_reason": "Active prior claim CLM-2026-00042 already filed for identical serial and component"
+}

@@ -1,0 +1,59 @@
+{
+  "claim_id": "CLM-2026-DEMO-011",
+  "product_category": "Washing Machine",
+  "subcategory": "Semi-Automatic Twin Tub Washer",
+  "brand": "Super Asia",
+  "model_name": "Super Wash Twin Tub 10KG",
+  "model_number": "SA-290",
+  "serial_number": "SPA-WM-TT-99120",
+  "invoice_serial_number": "SPA-WM-TT-99120",
+  "purchase_price": 54000.0,
+  "retailer": "Super Asia Authorized Dealer Gujranwala",
+  "purchase_date": "2025-05-10",
+  "warranty_duration_months": 24,
+  "fault_date": "2026-02-14",
+  "claim_date": "2026-02-18",
+  "affected_component": "wash_motor_assembly",
+  "damage_type": "Motor Winding Burn",
+  "fault_description": "Wash tub motor humming loudly but does not turn impeller; pungent electrical odor",
+  "symptom": "Motor stalls and trips circuit breaker after 10 seconds of operation",
+  "invoice_number": "INV-SPA-77291",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice",
+    "Dealer Stamped Warranty Card",
+    "CNIC Copy"
+  ],
+  "liquid_damage_detected": false,
+  "physical_damage": false,
+  "tamper_seal_broken": false,
+  "unauthorized_third_party_repair": false,
+  "prior_repairs": [],
+  "prior_replacement": false,
+  "model_predictions": {
+    "python_result": {
+      "predicted_class": "Likely Valid",
+      "confidence": 0.92,
+      "class_probabilities": {
+        "Likely Valid": 0.92,
+        "Manual Review Required": 0.05,
+        "Likely Invalid": 0.03
+      }
+    },
+    "gtm_result": {
+      "predicted_class": "Likely Invalid",
+      "confidence": 0.89,
+      "class_probabilities": {
+        "Likely Invalid": 0.89,
+        "Manual Review Required": 0.08,
+        "Likely Valid": 0.03
+      }
+    },
+    "model_consistency_status": "Model Disagreement",
+    "confidence_difference": 0.03
+  },
+  "expected_decision": "Manual Review Required",
+  "arbitration_reason": "Opposing model predictions (Tabular: Likely Valid vs Visual: Likely Invalid) forces manual underwriter review"
+}

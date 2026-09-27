@@ -1,0 +1,47 @@
+{
+  "claim_id": "CLM-2026-DEMO-009",
+  "product_category": "Smartphone",
+  "subcategory": "Mid-Range Smartphone",
+  "brand": "Samsung",
+  "model_name": "Galaxy A55 5G",
+  "model_number": "SM-A556E",
+  "serial_number": "SM-A556-99014-LHR",
+  "imei_1": "354092182048192",
+  "imei_2": "354092182048199",
+  "invoice_serial_number": "354092182048192",
+  "purchase_price": 130000.0,
+  "retailer": "Hafeez Center Mobile Market",
+  "purchase_date": "2025-09-01",
+  "warranty_duration_months": 12,
+  "fault_date": "2026-02-14",
+  "claim_date": "2026-02-18",
+  "affected_component": "battery_and_pmu_charging",
+  "damage_type": "Battery Swelling & Charging Port Damaged",
+  "fault_description": "Battery swollen, back cover lifting; phone was previously opened at Hall Road local repair shop to replace charging flex",
+  "symptom": "Adhesive peeled, non-OEM aftermarket screws inside chassis, void warranty tamper seal punctured",
+  "invoice_number": "INV-SMR-88129",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice",
+    "Warranty Card",
+    "CNIC Copy"
+  ],
+  "liquid_damage_detected": false,
+  "physical_damage": false,
+  "tamper_seal_broken": true,
+  "unauthorized_third_party_repair": true,
+  "prior_repairs": [
+    {
+      "repair_date": "2025-12-10",
+      "repaired_component": "charging_flex_cable",
+      "authorized_service_center": false,
+      "service_center_name": "Local Bazaar Repair Shop Hall Road"
+    }
+  ],
+  "prior_replacement": false,
+  "expected_decision": "Likely Invalid",
+  "expected_failed_rules": ["AUTHORIZED_REPAIR_INTEGRITY"],
+  "void_reason": "Manufacturer security tamper seal broken; unauthorized 3rd-party disassembly voids statutory warranty"
+}

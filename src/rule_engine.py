@@ -485,7 +485,7 @@ class WarrantyRuleEngine:
             if pta_verified is False or claim.get("cpid_patched_imei") is True:
                 return False, "Serial/IMEI validation failed: Device is non-PTA compliant, blacklisted, or CPID patched."
 
-            if invoice_sn and imei_1 not in invoice_sn and claimed_sn != invoice_sn:
+            if invoice_sn and imei_1 not in invoice_sn and (not imei_2 or imei_2 not in invoice_sn) and claimed_sn != invoice_sn:
                 return False, f"IMEI mismatch: Handset IMEI ({imei_1}) does not match invoice IMEI ({invoice_sn})."
 
             return True, "Smartphone IMEI and PTA DIRBS compliance verified."

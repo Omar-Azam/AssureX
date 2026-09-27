@@ -1,0 +1,43 @@
+{
+  "confidence_thresholds": {
+    "min_valid_confidence": 0.70,
+    "min_invalid_confidence": 0.70,
+    "uncertain_threshold": 0.40,
+    "max_allowed_confidence_diff_for_auto_approval": 0.25,
+    "max_allowed_confidence_diff_for_auto_rejection": 0.30
+  },
+  "model_consistency": {
+    "strong_match": {
+      "max_confidence_difference": 0.15,
+      "min_individual_confidence": 0.70,
+      "description": "Both models agree on predicted class with low confidence gap and high individual confidence"
+    },
+    "acceptable_match": {
+      "max_confidence_difference": 0.30,
+      "min_individual_confidence": 0.55,
+      "description": "Both models agree on predicted class with moderate confidence gap"
+    },
+    "weak_match": {
+      "max_confidence_difference": 0.50,
+      "min_individual_confidence": 0.45,
+      "description": "Both models agree on predicted class but have large confidence gap or low confidence"
+    },
+    "uncertain_result": {
+      "min_confidence_floor": 0.40,
+      "description": "Either model has confidence below floor, or predictions lack statistical significance"
+    }
+  },
+  "policy_guardrails": {
+    "zero_tolerance_rules": [
+      "WARRANTY_ACTIVE_CHECK",
+      "EXCLUDED_DAMAGE_CHECK",
+      "DATA_INTEGRITY_CHECK",
+      "SERIAL_NUMBER_CHECK",
+      "PROOF_OF_PURCHASE_CHECK"
+    ],
+    "escalate_contradictions_to_manual_review": true,
+    "escalate_model_disagreement_to_manual_review": true,
+    "escalate_uncertain_result_to_manual_review": true,
+    "escalate_rule_engine_mismatch_to_manual_review": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "claim_id": "CLM-2026-DEMO-007",
+  "product_category": "Washing Machine",
+  "subcategory": "Fully Automatic Top Load Washer",
+  "brand": "Dawlance",
+  "model_name": "Pro Fabric Inverter Top Load",
+  "model_number": "DWT-260-C",
+  "serial_number": "DWL-WM-TL260-99120",
+  "invoice_serial_number": "DWL-WM-TL260-99120",
+  "purchase_price": 98000.0,
+  "retailer": "Dawlance Official Flagship Store",
+  "purchase_date": "2026-03-01",
+  "warranty_duration_months": 12,
+  "fault_date": "2026-01-15",
+  "claim_date": "2026-01-20",
+  "affected_component": "drain_pump_assembly",
+  "damage_type": "Water Drainage Impeller Blockage",
+  "fault_description": "Water not draining from tub, error code E1 displayed",
+  "symptom": "Standing water in drum after rinse cycle completes",
+  "invoice_number": "INV-DWL-77123",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice",
+    "Warranty Card",
+    "CNIC Copy"
+  ],
+  "liquid_damage_detected": false,
+  "physical_damage": false,
+  "tamper_seal_broken": false,
+  "unauthorized_third_party_repair": false,
+  "prior_repairs": [],
+  "prior_replacement": false,
+  "expected_decision": "Manual Review Required",
+  "expected_failed_rules": ["DATA_INTEGRITY_CHECK"],
+  "detected_contradictions": [
+    "Claim filing date (2026-01-20) precedes purchase date (2026-03-01)",
+    "Fault occurrence date (2026-01-15) precedes purchase date (2026-03-01)"
+  ]
+}

@@ -114,6 +114,7 @@ import random
 import argparse
 from datetime import date, timedelta
 from typing import Dict, List, Tuple, Any, Optional
+from claim_metrics import compute_claim_metrics, parse_date
 
 import pandas as pd
 from faker import Faker
@@ -384,7 +385,7 @@ def generate_valid_claim(claim_idx: int) -> Dict[str, Any]:
     purchase_days_ago = random.randint(45, min(365, warranty_months * 30 - 30))
     purchase_dt = date.today() - timedelta(days=purchase_days_ago)
     warranty_start_dt = purchase_dt + timedelta(days=random.choice([0, 1]))
-    warranty_expiry_dt = warranty_start_dt + timedelta(days=int(warranty_months * 30.4375))
+    warranty_expiry_dt = compute_claim_metrics(purchase_dt, purchase_dt, warranty_months).expiry_date_obj
 
     # Fault occurs while warranty is actively valid (comfortably before expiry)
     days_active = max(10, (warranty_expiry_dt - warranty_start_dt).days - 30)
@@ -466,7 +467,7 @@ def generate_invalid_claim(claim_idx: int) -> Dict[str, Any]:
     purchase_days_ago = random.randint(200, 800)
     purchase_dt = date.today() - timedelta(days=purchase_days_ago)
     warranty_start_dt = purchase_dt + timedelta(days=1)
-    warranty_expiry_dt = warranty_start_dt + timedelta(days=int(warranty_months * 30.4375))
+    warranty_expiry_dt = compute_claim_metrics(purchase_dt, purchase_dt, warranty_months).expiry_date_obj
 
     # Defaults
     has_receipt = True
@@ -577,7 +578,7 @@ def generate_manual_review_claim(claim_idx: int) -> Dict[str, Any]:
     purchase_days_ago = random.randint(60, min(700, warranty_months * 30 + 10))
     purchase_dt = date.today() - timedelta(days=purchase_days_ago)
     warranty_start_dt = purchase_dt + timedelta(days=1)
-    warranty_expiry_dt = warranty_start_dt + timedelta(days=int(warranty_months * 30.4375))
+    warranty_expiry_dt = compute_claim_metrics(purchase_dt, purchase_dt, warranty_months).expiry_date_obj
 
     # Base values
     has_receipt = True

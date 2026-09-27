@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssureX Claim Engine — Multimodal Claims Processing</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Modern Stylesheet -->
+  <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================= -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#dashboard" onclick="app.navigate('dashboard'); return false;">
+        <div class="brand-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <span>AssureX <span class="fw-normal text-secondary fs-6">Claim Engine</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav-links">
+          <!-- Dynamic Role-Based Links Rendered by JS -->
+          <li class="nav-item">
+            <a class="nav-link" href="#dashboard" onclick="app.navigate('dashboard'); return false;">
+              <i class="bi bi-grid-1x2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item customer-only">
+            <a class="nav-link" href="#product-register" onclick="app.navigate('product-register'); return false;">
+              <i class="bi bi-laptop"></i> Register Product
+            </a>
+          </li>
+          <li class="nav-item customer-only">
+            <a class="nav-link" href="#claim-wizard" onclick="app.navigate('claim-wizard'); return false;">
+              <i class="bi bi-plus-circle"></i> File Claim
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#claim-tracker" onclick="app.navigate('claim-tracker'); return false;">
+              <i class="bi bi-search"></i> Track Claim
+            </a>
+          </li>
+          <li class="nav-item reviewer-only" style="display:none;">
+            <a class="nav-link" href="#review-queue" onclick="app.navigate('review-queue'); return false;">
+              <i class="bi bi-inbox"></i> Review Queue <span class="badge bg-warning text-dark ms-1" id="nav-queue-count">0</span>
+            </a>
+          </li>
+          <li class="nav-item admin-only" style="display:none;">
+            <a class="nav-link" href="#admin-dashboard" onclick="app.navigate('admin-dashboard'); return false;">
+              <i class="bi bi-speedometer2"></i> Admin Analytics
+            </a>
+          </li>
+        </ul>
+
+        <!-- User / Auth Profile Control -->
+        <div class="d-flex align-items-center gap-2" id="nav-auth-controls">
+          <div id="user-profile-badge" class="user-badge" style="display:none;">
+            <i class="bi bi-person-circle fs-5 text-primary"></i>
+            <span class="fw-semibold" id="nav-user-name">User</span>
+            <span class="role-pill customer" id="nav-user-role">Customer</span>
+            <button class="btn btn-sm btn-link text-secondary p-0 ms-2" onclick="app.openProfileModal();" title="Manage Profile">
+              <i class="bi bi-gear fs-6"></i>
+            </button>
+            <button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="app.logout();" title="Logout">
+              <i class="bi bi-box-arrow-right fs-6"></i>
+            </button>
+          </div>
+          <button class="btn btn-outline-primary btn-sm px-3" id="nav-login-btn" onclick="app.navigate('auth');">
+            <i class="bi bi-box-arrow-in-right"></i> Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="container-fluid py-4 flex-grow-1 px-md-4">
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 1: AUTHENTICATION (Login & Register)
+         ----------------------------------------------------------------------- -->
+    <div id="view-auth" class="view-container">
+      <div class="row justify-content-center pt-3">
+        <div class="col-12 col-md-8 col-lg-5">
+          <div class="card card-modern shadow-lg border-0">
+            <div class="card-body p-4 p-md-5">
+              
+              <div class="text-center mb-4">
+                <div class="brand-icon mx-auto mb-2" style="width: 48px; height: 48px; font-size: 1.5rem;">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <h3 class="fw-bold mb-1">Welcome to AssureX</h3>
+                <p class="text-secondary text-sm">Multimodal AI Warranty Claims Processing Engine</p>
+              </div>
+
+              <!-- Auth Tabs (Login / Register) -->
+              <ul class="nav nav-pills nav-fill mb-4 p-1 bg-light rounded-3" id="authTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active rounded-2" id="tab-login-btn" data-bs-toggle="pill" data-bs-target="#tab-login" type="button">Sign In</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-2" id="tab-register-btn" data-bs-toggle="pill" data-bs-target="#tab-register" type="button">Create Account</button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="authTabsContent">
+                <!-- Login Form -->
+                <div class="tab-pane fade show active" id="tab-login" role="tabpanel">
+                  <form id="form-login" onsubmit="app.handleLogin(event);">
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Username or Email</label>
+                      <input type="text" class="form-control" id="login-username" required placeholder="admin or admin@assurex.com">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Password</label>
+                      <input type="password" class="form-control" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                      Sign In <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Register Form -->
+                <div class="tab-pane fade" id="tab-register" role="tabpanel">
+                  <form id="form-register" onsubmit="app.handleRegister(event);">
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Full Name</label>
+                      <input type="text" class="form-control" id="reg-fullname" required placeholder="Ali Khan">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Username</label>
+                      <input type="text" class="form-control" id="reg-username" required placeholder="alikhan">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Email Address</label>
+                      <input type="email" class="form-control" id="reg-email" required placeholder="ali@example.com">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label text-sm fw-semibold">Password</label>
+                      <input type="password" class="form-control" id="reg-password" required placeholder="Min 6 characters">
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label text-sm fw-semibold">User Role</label>
+                      <select class="form-select" id="reg-role">
+                        <option value="customer" selected>Customer (Claimant)</option>
+                        <option value="service_center">Authorized Service Center</option>
+                        <option value="claim_reviewer">Warranty Claim Reviewer</option>
+                        <option value="admin">System Administrator</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                      Create Account <i class="bi bi-check-circle ms-1"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 2: USER DASHBOARD
+         ----------------------------------------------------------------------- -->
+    <div id="view-user-dashboard" class="view-container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-3">
+        <div>
+          <h2 class="fw-bold mb-1">Customer Claims Portal</h2>
+          <p class="text-secondary mb-0">Manage registered electronics, warranty coverage, and active claims</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary" onclick="app.navigate('product-register');">
+            <i class="bi bi-plus-lg"></i> Register Product
+          </button>
+          <button class="btn btn-primary" onclick="app.navigate('claim-wizard');">
+            <i class="bi bi-file-earmark-plus"></i> File New Claim
+          </button>
+        </div>
+      </div>
+
+      <!-- Warranty Tracking & Expiry Alerts Container -->
+      <div id="user-warranty-alerts" class="mb-3"></div>
+
+      <!-- KPI Summary Cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="kpi-card">
+            <div class="kpi-icon blue"><i class="bi bi-shield-check"></i></div>
+            <div>
+              <div class="kpi-value" id="dash-active-warranties">0</div>
+              <div class="kpi-label">Active Protected Products</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="kpi-card">
+            <div class="kpi-icon green"><i class="bi bi-file-earmark-text"></i></div>
+            <div>
+              <div class="kpi-value" id="dash-total-claims">0</div>
+              <div class="kpi-label">Total Claims Submitted</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="kpi-card">
+            <div class="kpi-icon amber"><i class="bi bi-clock-history"></i></div>
+            <div>
+              <div class="kpi-value" id="dash-pending-actions">0</div>
+              <div class="kpi-label">Claims Under Evaluation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Warranties & Products -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-xl-5">
+          <div class="card card-modern h-100">
+            <div class="card-header-clean">
+              <h5 class="fw-bold mb-0"><i class="bi bi-laptop text-primary me-2"></i>My Registered Devices</h5>
+              <button class="btn btn-sm btn-link p-0" onclick="app.loadUserProducts();">Refresh</button>
+            </div>
+            <div class="card-body-clean p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light text-xs text-uppercase text-secondary">
+                    <tr>
+                      <th class="ps-4">Product</th>
+                      <th>Serial No</th>
+                      <th>Warranty</th>
+                      <th class="pe-4 text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="user-products-tbody">
+                    <tr><td colspan="4" class="text-center py-4 text-secondary">Loading products...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submitted Claims Table -->
+        <div class="col-12 col-xl-7">
+          <div class="card card-modern h-100">
+            <div class="card-header-clean">
+              <h5 class="fw-bold mb-0"><i class="bi bi-clock-history text-primary me-2"></i>Recent Warranty Claims</h5>
+              <button class="btn btn-sm btn-link p-0" onclick="app.loadUserClaims();">Refresh</button>
+            </div>
+            <div class="card-body-clean p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light text-xs text-uppercase text-secondary">
+                    <tr>
+                      <th class="ps-4">Claim ID</th>
+                      <th>Device & Defect</th>
+                      <th>Filing Date</th>
+                      <th>Status</th>
+                      <th class="pe-4 text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="user-claims-tbody">
+                    <tr><td colspan="5" class="text-center py-4 text-secondary">Loading claims...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 3: PRODUCT REGISTRATION
+         ----------------------------------------------------------------------- -->
+    <div id="view-product-register" class="view-container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="card card-modern">
+            <div class="card-header-clean">
+              <div>
+                <h4 class="fw-bold mb-1">Register Consumer Device</h4>
+                <p class="text-secondary text-sm mb-0">Activate manufacturer warranty and statutory protection</p>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary" onclick="app.navigate('dashboard');">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+            </div>
+            <div class="card-body-clean">
+              <form id="form-product-register" onsubmit="app.handleProductRegister(event);">
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Product Category *</label>
+                    <select class="form-select" id="prod-category" required onchange="app.onCategoryChange(this.value);">
+                      <option value="Smartphone" selected>Smartphone</option>
+                      <option value="Laptop">Laptop / Notebook</option>
+                      <option value="Washing Machine">Washing Machine</option>
+                      <option value="Smart TV">Smart TV / OLED Panel</option>
+                      <option value="Audio">Audio / Soundbar</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Brand *</label>
+                    <input type="text" class="form-control" id="prod-brand" required placeholder="Samsung, Apple, Lenovo">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Product Title / Model Name *</label>
+                    <input type="text" class="form-control" id="prod-name" required placeholder="Galaxy S24 Ultra 512GB">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Model Number / Code *</label>
+                    <input type="text" class="form-control" id="prod-model" required placeholder="SM-S928B, 82WK0046US">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Serial Number / IMEI *</label>
+                    <input type="text" class="form-control" id="prod-serial" required placeholder="Unique chassis barcode or 15-digit IMEI">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Purchase Price (PKR) *</label>
+                    <input type="number" step="0.01" class="form-control" id="prod-price" required placeholder="245500.00">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Purchase Date *</label>
+                    <input type="date" class="form-control" id="prod-date" required>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label text-sm fw-semibold">Authorized Retailer / Store *</label>
+                    <input type="text" class="form-control" id="prod-retailer" required placeholder="Daraz Mall, Airlink, TechnoCity">
+                  </div>
+                  <div class="col-12">
+                    <div class="alert alert-info d-flex align-items-center mb-0 mt-2 py-2">
+                      <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                      <div class="text-xs">
+                        Warranty metrics will automatically compute exact calendar-month expiry via <code>claim_metrics.compute_claim_metrics()</code> upon registration.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 text-end">
+                  <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-check2-circle me-1"></i> Complete Registration & Activate Warranty
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 4: CLAIM SUBMISSION WIZARD
+         ----------------------------------------------------------------------- -->
+    <div id="view-claim-wizard" class="view-container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-9">
+          
+          <div class="text-center mb-4">
+            <h3 class="fw-bold mb-1">File Warranty Claim</h3>
+            <p class="text-secondary text-sm">Follow the 4-step wizard to submit proof of purchase and fault evidence</p>
+          </div>
+
+          <!-- Wizard Progress Bar -->
+          <div class="wizard-progress">
+            <div class="wizard-progress-bar" id="wizard-bar"></div>
+            <div class="wizard-step active" id="wstep-1">
+              <div class="step-circle">1</div>
+              <div class="step-label">Select Device</div>
+            </div>
+            <div class="wizard-step" id="wstep-2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Fault Details</div>
+            </div>
+            <div class="wizard-step" id="wstep-3">
+              <div class="step-circle">3</div>
+              <div class="step-label">Upload Proof</div>
+            </div>
+            <div class="wizard-step" id="wstep-4">
+              <div class="step-circle">4</div>
+              <div class="step-label">OCR Review</div>
+            </div>
+          </div>
+
+          <!-- Wizard Step Cards -->
+          <div class="card card-modern shadow-sm">
+            
+            <!-- STEP 1: PRODUCT SELECT -->
+            <div id="wizard-content-1" class="p-4 p-md-5">
+              <h5 class="fw-bold mb-3"><i class="bi bi-1-circle text-primary me-2"></i>Select Device for Warranty Service</h5>
+              <div class="mb-4">
+                <label class="form-label text-sm fw-semibold">Choose from your registered products:</label>
+                <select class="form-select form-select-lg" id="w-product-select" onchange="app.onWizardProductSelected(this.value);">
+                  <option value="">-- Choose a registered product --</option>
+                </select>
+              </div>
+
+              <!-- Product Summary Card -->
+              <div id="w-product-card" class="card bg-light border p-3 rounded-3 mb-4" style="display:none;">
+                <div class="row g-2 text-sm">
+                  <div class="col-6 col-md-3"><strong>Brand:</strong> <span id="w-card-brand">-</span></div>
+                  <div class="col-6 col-md-3"><strong>Model:</strong> <span id="w-card-model">-</span></div>
+                  <div class="col-6 col-md-3"><strong>Serial:</strong> <span id="w-card-serial">-</span></div>
+                  <div class="col-6 col-md-3"><strong>Warranty:</strong> <span class="badge bg-success" id="w-card-warranty">Active</span></div>
+                </div>
+              </div>
+
+              <div class="text-end">
+                <button class="btn btn-primary px-4" onclick="app.wizardNext(1);">
+                  Next: Fault Details <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: FAULT DETAILS -->
+            <div id="wizard-content-2" class="p-4 p-md-5" style="display:none;">
+              <h5 class="fw-bold mb-3"><i class="bi bi-2-circle text-primary me-2"></i>Incident & Hardware Defect Information</h5>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">Fault Occurrence Date *</label>
+                  <input type="date" class="form-control" id="w-fault-date" required>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">Defect / Damage Type *</label>
+                  <select class="form-select" id="w-damage-type" required>
+                    <option value="Display Panel Defect">Display Panel Defect (Vertical Green Line, Dead Pixels)</option>
+                    <option value="Battery Degradation / Swelling">Battery Degradation / Swelling</option>
+                    <option value="Motherboard Power Circuit Failure">Motherboard Power Circuit Failure</option>
+                    <option value="Water Valve Failure">Water Valve Failure (Washing Machine)</option>
+                    <option value="Liquid / Moisture Damage">Liquid / Moisture Damage (Excluded from standard warranty)</option>
+                    <option value="Physical Impact / Cracked Screen">Physical Screen Impact / Crack</option>
+                    <option value="Software / Firmware Bootloop">Software / Firmware Bootloop</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-sm fw-semibold">Detailed Description of Failure *</label>
+                  <textarea class="form-control" id="w-fault-desc" rows="3" required placeholder="Describe what occurred, any error messages, and operating conditions..."></textarea>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">Repair History</label>
+                  <select class="form-select" id="w-repair-history">
+                    <option value="0 repairs">0 prior repairs (Clean record)</option>
+                    <option value="1 repair (Authorized Service Center)">1 repair (Authorized Service Center)</option>
+                    <option value="2 repairs (Authorized Service Center)">2 repairs (Authorized Service Center)</option>
+                    <option value="3 repairs (Authorized Service Center)">3 repairs (Lemon Law review trigger)</option>
+                    <option value="1 repair (Unauthorized Third-Party)">1 repair (Unauthorized third-party / bazaar)</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6 d-flex align-items-center">
+                  <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="w-prior-replacement">
+                    <label class="form-check-label text-sm" for="w-prior-replacement">
+                      Has this unit ever received a prior replacement?
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-outline-secondary" onclick="app.wizardBack(2);"><i class="bi bi-arrow-left"></i> Back</button>
+                <button class="btn btn-primary px-4" onclick="app.wizardNext(2);">Next: Upload Proof <i class="bi bi-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 3: DOCUMENT UPLOAD -->
+            <div id="wizard-content-3" class="p-4 p-md-5" style="display:none;">
+              <h5 class="fw-bold mb-3"><i class="bi bi-3-circle text-primary me-2"></i>Upload Proof-of-Purchase & Hardware Evidence</h5>
+              <p class="text-secondary text-sm">Our automated system performs SHA-256 duplicate detection and OCR field extraction.</p>
+
+              <div class="row g-3 mb-4">
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">1. Sales Invoice / Receipt (Required for OCR verification) *</label>
+                  <input type="file" class="form-control" id="w-file-receipt" accept="image/*,application/pdf" onchange="app.handleReceiptFileSelect(this);">
+                  <div class="form-text text-xs">JPEG, PNG, or PDF of official invoice.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">2. Warranty Card / Registration Slip</label>
+                  <input type="file" class="form-control" id="w-file-warranty" accept="image/*,application/pdf">
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">3. Photo of Defect / Product</label>
+                  <input type="file" class="form-control" id="w-file-photo" accept="image/*">
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label text-sm fw-semibold">4. Photo of Chassis Serial / IMEI Label</label>
+                  <input type="file" class="form-control" id="w-file-serial" accept="image/*">
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-outline-secondary" onclick="app.wizardBack(3);"><i class="bi bi-arrow-left"></i> Back</button>
+                <button class="btn btn-primary px-4" onclick="app.wizardNext(3);">Next: Review Extracted OCR Data <i class="bi bi-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 4: REVIEW EXTRACTED DATA & SUBMIT -->
+            <div id="wizard-content-4" class="p-4 p-md-5" style="display:none;">
+              <h5 class="fw-bold mb-2"><i class="bi bi-4-circle text-primary me-2"></i>Automated OCR Extraction & Data Verification</h5>
+              <p class="text-secondary text-sm mb-4">Review the fields parsed from your receipt. Flagged fields can be verified before final submission.</p>
+
+              <!-- Extracted Fields Table -->
+              <div class="table-responsive mb-4">
+                <table class="table table-bordered align-middle">
+                  <thead class="table-light text-xs text-uppercase">
+                    <tr>
+                      <th>Field</th>
+                      <th>Extracted Value</th>
+                      <th>Confidence</th>
+                      <th>Verification Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="w-ocr-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Final Submission Callout -->
+              <div class="alert alert-primary d-flex align-items-center py-3">
+                <i class="bi bi-cpu-fill fs-3 me-3 text-primary"></i>
+                <div>
+                  <strong>Ready for Multimodal Evaluation:</strong>
+                  <div class="text-sm">Clicking submit will execute the 4-part AI pipeline (Policy Rules + Tabular XGBoost/RF + Visual Card Classifier + Multimodal Decision Engine) in real-time.</div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-outline-secondary" onclick="app.wizardBack(4);"><i class="bi bi-arrow-left"></i> Back</button>
+                <button class="btn btn-success btn-lg px-5 fw-bold" id="w-submit-btn" onclick="app.submitFinalClaim();">
+                  <i class="bi bi-send-check"></i> Submit Claim & Run Evaluation
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 5: CLAIM STATUS TRACKER
+         ----------------------------------------------------------------------- -->
+    <div id="view-claim-tracker" class="view-container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          
+          <!-- Tracker Search Bar -->
+          <div class="card card-modern p-4 mb-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-search text-primary me-2"></i>Claim Status & Audit Tracker</h4>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text bg-white"><i class="bi bi-hash"></i></span>
+              <input type="text" class="form-control" id="tracker-search-input" placeholder="Enter Claim ID (e.g. CLM-2026-00001)">
+              <button class="btn btn-primary px-4 fw-semibold" onclick="app.trackClaim();">Track Claim</button>
+            </div>
+          </div>
+
+          <!-- Claim Detail & Timeline (Hidden until loaded) -->
+          <div id="tracker-result-card" style="display:none;">
+            
+            <!-- Decision Banner -->
+            <div class="decision-card-banner mb-4" id="tracker-decision-banner">
+              <div>
+                <span class="text-xs text-uppercase opacity-75">Adjudication Result</span>
+                <h4 class="mb-0 fw-bold" id="tracker-decision-text">LIKELY VALID</h4>
+              </div>
+              <div class="text-end">
+                <span class="text-xs text-uppercase opacity-75">Status</span>
+                <h5 class="mb-0 fw-bold" id="tracker-status-text">Approved</h5>
+              </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+              <!-- Timeline -->
+              <div class="col-12 col-lg-5">
+                <div class="card card-modern h-100 p-4">
+                  <h5 class="fw-bold mb-3"><i class="bi bi-diagram-3 text-primary me-2"></i>Lifecycle Progression</h5>
+                  <div class="timeline" id="tracker-timeline">
+                    <!-- Populated dynamically -->
+                  </div>
+                  <div class="mt-auto pt-3 text-center">
+                    <button class="btn btn-outline-primary w-100" id="tracker-pdf-btn">
+                      <i class="bi bi-file-earmark-pdf"></i> Download Official PDF Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Evaluation Insights -->
+              <div class="col-12 col-lg-7">
+                <div class="card card-modern h-100 p-4">
+                  <h5 class="fw-bold mb-3"><i class="bi bi-cpu text-primary me-2"></i>Multimodal AI & Policy Evaluation</h5>
+                  
+                  <!-- Model Consistencies -->
+                  <div class="row g-2 mb-3 text-sm">
+                    <div class="col-6"><strong>Model Consistency:</strong> <span id="tracker-consistency" class="fw-bold text-primary">Strong Match</span></div>
+                    <div class="col-6"><strong>Confidence Gap:</strong> <span id="tracker-confidence-gap" class="fw-bold">4.0%</span></div>
+                  </div>
+
+                  <!-- Rules Checklist -->
+                  <div class="mb-3">
+                    <h6 class="fw-bold text-xs text-uppercase text-secondary">Policy Rules Verification:</h6>
+                    <div id="tracker-rules-list"></div>
+                  </div>
+
+                  <!-- Factors Supporting / Opposing -->
+                  <div class="mb-3">
+                    <h6 class="fw-bold text-xs text-uppercase text-secondary">Decision Rationale:</h6>
+                    <ul class="text-sm ps-3 mb-0" id="tracker-factors-list"></ul>
+                  </div>
+
+                  <!-- Discrepancies & Contradictions -->
+                  <div id="tracker-contradictions-box" class="alert alert-warning py-2 px-3 text-sm mb-0" style="display:none;">
+                    <strong>Contradictions Detected:</strong>
+                    <ul class="ps-3 mb-0 text-xs" id="tracker-contradictions-list"></ul>
+                  </div>
+
+                  <!-- Download Official PDF Report -->
+                  <div class="mt-4 pt-3 border-top text-end">
+                    <button class="btn btn-outline-danger" id="tracker-download-pdf-btn" onclick="app.downloadClaimPdf();">
+                      <i class="bi bi-file-earmark-pdf-fill me-1"></i> Download Official PDF Report
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 6: REVIEWER DASHBOARD (Manual Review Queue)
+         ----------------------------------------------------------------------- -->
+    <div id="view-reviewer-dashboard" class="view-container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-3">
+        <div>
+          <h2 class="fw-bold mb-1">Underwriter Review Queue</h2>
+          <p class="text-secondary mb-0">Adjudicate borderline claims, policy overrides, and multimodal discrepancies</p>
+        </div>
+        <button class="btn btn-outline-primary" onclick="app.loadReviewQueue();">
+          <i class="bi bi-arrow-clockwise"></i> Refresh Queue
+        </button>
+      </div>
+
+      <!-- Queue Table -->
+      <div class="card card-modern mb-4">
+        <div class="card-header-clean">
+          <h5 class="fw-bold mb-0">Claims Requiring Manual Review (<span id="queue-badge-count">0</span>)</h5>
+        </div>
+        <div class="card-body-clean p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light text-xs text-uppercase text-secondary">
+                <tr>
+                  <th class="ps-4">Claim ID</th>
+                  <th>Claimant & Product</th>
+                  <th>Defect Type</th>
+                  <th>Consistency Status</th>
+                  <th>Confidence Gap</th>
+                  <th>Status</th>
+                  <th class="pe-4 text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody id="reviewer-queue-tbody">
+                <tr><td colspan="7" class="text-center py-4 text-secondary">Loading review queue...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 7: ADMIN DASHBOARD (Analytics & Audit Trail)
+         ----------------------------------------------------------------------- -->
+    <div id="view-admin-dashboard" class="view-container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-3">
+        <div>
+          <h2 class="fw-bold mb-1">Executive Analytics & Governance</h2>
+          <p class="text-secondary mb-0">System KPIs, model agreement telemetry, and immutable audit logs</p>
+        </div>
+        <div class="d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export Data
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+              <li><h6 class="dropdown-header">Claims Data</h6></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('claims', 'csv'); return false;"><i class="bi bi-filetype-csv me-2 text-success"></i>Claims (CSV)</a></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('claims', 'excel'); return false;"><i class="bi bi-file-earmark-excel me-2 text-success"></i>Claims (Excel)</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">Products & Warranties</h6></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('products', 'csv'); return false;"><i class="bi bi-filetype-csv me-2 text-primary"></i>Products (CSV)</a></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('warranties', 'csv'); return false;"><i class="bi bi-filetype-csv me-2 text-info"></i>Warranties (CSV)</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">System Analytics</h6></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('analytics', 'csv'); return false;"><i class="bi bi-graph-up me-2 text-dark"></i>Analytics KPIs (CSV)</a></li>
+              <li><a class="dropdown-item" href="#" onclick="app.exportData('analytics', 'excel'); return false;"><i class="bi bi-file-earmark-excel me-2 text-success"></i>Analytics KPIs (Excel)</a></li>
+            </ul>
+          </div>
+          <button class="btn btn-outline-primary" onclick="app.loadAdminDashboard();">
+            <i class="bi bi-arrow-clockwise"></i> Refresh Metrics
+          </button>
+        </div>
+      </div>
+
+      <!-- Executive KPI Ribbon -->
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon blue"><i class="bi bi-files"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-total">0</div>
+              <div class="kpi-label">Total Claims</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon green"><i class="bi bi-check-circle"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-valid">0</div>
+              <div class="kpi-label">Valid Claims</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon rose"><i class="bi bi-x-circle"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-invalid">0</div>
+              <div class="kpi-label">Invalid Claims</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon amber"><i class="bi bi-exclamation-triangle"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-review">0</div>
+              <div class="kpi-label">Manual Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon purple"><i class="bi bi-shuffle"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-disagreement">0.0%</div>
+              <div class="kpi-label">Model Disagreement</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-2">
+          <div class="kpi-card">
+            <div class="kpi-icon cyan"><i class="bi bi-speedometer2"></i></div>
+            <div>
+              <div class="kpi-value" id="admin-kpi-confidence">0.0%</div>
+              <div class="kpi-label">Avg Confidence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart.js Visualizations -->
+      <div class="row g-4 mb-4">
+        <!-- Claim Trends Chart -->
+        <div class="col-12 col-xl-6">
+          <div class="card card-modern p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0"><i class="bi bi-graph-up text-primary me-2"></i>Claim Filing Trends</h5>
+              <span class="badge bg-light text-secondary border">Volume Timeline</span>
+            </div>
+            <div style="position: relative; height: 260px;">
+              <canvas id="chart-trends"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision Distribution Donut -->
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card card-modern p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-pie-chart text-primary me-2"></i>Decisions</h5>
+            <div style="position: relative; height: 260px;">
+              <canvas id="chart-decisions"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model Consistency Bar Chart -->
+        <div class="col-12 col-md-6 col-xl-3">
+          <div class="card card-modern p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-bar-chart text-primary me-2"></i>Agreement</h5>
+            <div style="position: relative; height: 260px;">
+              <canvas id="chart-consistency"></canvas>
+            </div>
+          </div>
+        </div>
+      <!-- Monitoring & Anomaly Detection + Model Versions -->
+      <div class="row g-4 mb-4">
+        <!-- Anomaly Detection -->
+        <div class="col-12 col-xl-7">
+          <div class="card card-modern h-100">
+            <div class="card-header-clean">
+              <h5 class="fw-bold mb-0"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Active Anomaly & Fraud Alerts</h5>
+              <span class="badge bg-danger" id="admin-anomalies-count">0 Detected</span>
+            </div>
+            <div class="card-body-clean p-0">
+              <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
+                <table class="table table-hover align-middle mb-0 text-sm">
+                  <thead class="table-light text-xs text-uppercase text-secondary">
+                    <tr>
+                      <th class="ps-4">Severity</th>
+                      <th>Type</th>
+                      <th>Target</th>
+                      <th>Description</th>
+                      <th class="pe-4">Detected</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-anomalies-tbody">
+                    <tr><td colspan="5" class="text-center py-4 text-secondary">No active system anomalies detected.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Model Versions & Thresholds -->
+        <div class="col-12 col-xl-5">
+          <div class="card card-modern h-100">
+            <div class="card-header-clean">
+              <h5 class="fw-bold mb-0"><i class="bi bi-cpu-fill text-primary me-2"></i>AI Model Governance & Versions</h5>
+              <span class="badge bg-success">Online</span>
+            </div>
+            <div class="card-body p-3 text-sm" id="admin-model-versions-box">
+              <div class="p-2 border rounded-2 mb-2 bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>Tabular ML Model:</strong> <span class="badge bg-primary">v2.4.1</span>
+                </div>
+                <div class="text-xs text-secondary mt-1">27 Engineered Features • XGBoost/Random Forest Hybrid</div>
+              </div>
+              <div class="p-2 border rounded-2 mb-2 bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>Visual Card Model:</strong> <span class="badge bg-info text-dark">GTM v3.0.0</span>
+                </div>
+                <div class="text-xs text-secondary mt-1">224x224 RGB • Keras MobileNetV2 • 3 Target Classes</div>
+              </div>
+              <div class="p-2 border rounded-2 bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>Decision Engine:</strong> <span class="badge bg-secondary">Arbitration v1.8</span>
+                </div>
+                <div class="text-xs text-secondary mt-1">Config: config/thresholds.json • Automated Contradiction Gates</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audit Trail Table -->
+      <div class="card card-modern">
+        <div class="card-header-clean">
+          <h5 class="fw-bold mb-0"><i class="bi bi-journal-text text-primary me-2"></i>System Audit Trail</h5>
+          <span class="text-xs text-secondary">Immutable event log</span>
+        </div>
+        <div class="card-body-clean p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-sm">
+              <thead class="table-light text-xs text-uppercase text-secondary">
+                <tr>
+                  <th class="ps-4">Timestamp</th>
+                  <th>Action</th>
+                  <th>Entity</th>
+                  <th>Entity ID</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="admin-audit-tbody">
+                <tr><td colspan="5" class="text-center py-4 text-secondary">Loading audit trail...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       REVIEW ACTION MODAL
+       ========================================================================= -->
+  <div class="modal fade" id="modalReviewAction" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content card-modern border-0">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="modal-review-title">Adjudicate Claim</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <!-- Summary info -->
+          <div class="bg-light p-3 rounded-3 mb-4 text-sm">
+            <div class="row g-2">
+              <div class="col-6"><strong>Claim ID:</strong> <span id="m-claim-id">-</span></div>
+              <div class="col-6"><strong>Product:</strong> <span id="m-product-name">-</span></div>
+              <div class="col-6"><strong>Defect:</strong> <span id="m-damage-type">-</span></div>
+              <div class="col-6"><strong>Decision Suggestion:</strong> <span id="m-ai-decision" class="badge bg-primary">-</span></div>
+            </div>
+          </div>
+
+          <form id="form-submit-review" onsubmit="app.handleReviewSubmit(event);">
+            <div class="mb-3">
+              <label class="form-label text-sm fw-semibold">Review Action *</label>
+              <select class="form-select" id="m-review-action" required>
+                <option value="approve">Approve Claim (Authorize Payout / Repair)</option>
+                <option value="reject">Reject Claim (Uphold Exclusion)</option>
+                <option value="override">Underwriter Policy Override</option>
+                <option value="request_evidence">Request Additional Evidence from Claimant</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-sm fw-semibold">Adjudicator Notes & Rationale *</label>
+              <textarea class="form-control" id="m-review-notes" rows="4" required placeholder="Specify technical inspection findings or override justification..."></textarea>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <button type="button" class="btn btn-outline-danger" onclick="app.downloadClaimPdf(document.getElementById('m-claim-id').textContent);">
+                <i class="bi bi-file-earmark-pdf-fill me-1"></i> Download Claim PDF
+              </button>
+              <div>
+                <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary px-4">Confirm Adjudication</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       USER PROFILE MANAGEMENT MODAL
+       ========================================================================= -->
+  <div class="modal fade" id="modalUserProfile" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content card-modern border-0">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold"><i class="bi bi-person-gear text-primary me-2"></i>User Profile Management</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="form-user-profile" onsubmit="app.handleProfileUpdate(event);">
+            <div class="mb-3 text-center">
+              <div class="brand-icon mx-auto mb-2" style="width: 48px; height: 48px; font-size: 1.5rem;">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <h5 class="fw-bold mb-0" id="prof-display-username">Username</h5>
+              <span class="role-pill customer mt-1 d-inline-block" id="prof-display-role">Customer</span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-sm fw-semibold">Full Name *</label>
+              <input type="text" class="form-control" id="prof-fullname" required minlength="2">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-sm fw-semibold">Email Address *</label>
+              <input type="email" class="form-control" id="prof-email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-sm fw-semibold">Change Password (leave blank to keep current)</label>
+              <input type="password" class="form-control" id="prof-password" placeholder="••••••••" minlength="6">
+            </div>
+            <div class="text-end">
+              <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary px-4" id="prof-save-btn">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
+    <div id="appToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage">Notification message</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-top py-3 text-center text-xs text-secondary mt-auto">
+    AssureX Claims Processing Engine • Automated Multimodal Evaluation & Policy Governance
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Application Client JS -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

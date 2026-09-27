@@ -18,6 +18,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime, date, timedelta
 from typing import Dict, Any, List, Optional, Tuple
+from claim_metrics import compute_claim_metrics, parse_date
 
 # Global cache for loaded model and preprocessing artifacts
 _MODEL_CACHE = {
@@ -109,20 +110,15 @@ def transform_raw_claim_to_features(
     e_date = _parse_date_safe(claim_record.get("warranty_expiry_date"))
     c_date = _parse_date_safe(claim_record.get("claim_submission_date") or claim_record.get("claim_date")) or date.today()
 
-    # 2. Derived Feature: product_age_days
-    if p_date and c_date:
-        product_age_days = float((c_date - p_date).days)
-    elif p_date and f_date:
-        product_age_days = float((f_date - p_date).days)
+    # 2 & 3. Derived Features: product_age_days and remaining_warranty_days via canonical claim_metrics
+    dur = claim_record.get("warranty_duration_months", 12)
+    c_date_val = claim_record.get("claim_submission_date") or claim_record.get("claim_date") or date.today()
+    if p_date:
+        metrics = compute_claim_metrics(p_date, c_date_val, dur)
+        product_age_days = float(metrics.product_age_days)
+        remaining_warranty_days = float(metrics.remaining_warranty_days)
     else:
-        product_age_days = 180.0  # sensible domain default
-
-    # 3. Derived Feature: remaining_warranty_days
-    if e_date and f_date:
-        remaining_warranty_days = float((e_date - f_date).days)
-    elif e_date and c_date:
-        remaining_warranty_days = float((e_date - c_date).days)
-    else:
+        product_age_days = 180.0
         remaining_warranty_days = 0.0
 
     # 4. Derived Feature: missing_document_count

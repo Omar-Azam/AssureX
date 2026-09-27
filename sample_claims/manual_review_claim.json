@@ -1,0 +1,51 @@
+{
+  "claim_id": "CLM-2026-DEMO-003",
+  "product_category": "Washing Machine",
+  "subcategory": "Fully Automatic Front Load Washer",
+  "brand": "Haier",
+  "model_name": "Inverter Front Load 9KG",
+  "model_number": "HWM90-14829",
+  "serial_number": "HAI-WM-FL90-33018",
+  "invoice_serial_number": "HAI-WM-FL90-33018",
+  "purchase_price": 142000.0,
+  "retailer": "Metro Cash & Carry Electronics",
+  "purchase_date": "2025-03-10",
+  "warranty_duration_months": 24,
+  "fault_date": "2026-02-05",
+  "claim_date": "2026-02-08",
+  "affected_component": "direct_drive_inverter_motor",
+  "damage_type": "Motor Vibration & Bearing Noise",
+  "fault_description": "Excessive shuddering and roaring sound during high spin cycle; unit has previously had two motor stator replacements",
+  "symptom": "Drum grinding noise during 1400 RPM spin, error E3 on digital panel",
+  "invoice_number": "INV-METRO-99301",
+  "invoice_attached": true,
+  "warranty_card_attached": true,
+  "cnic_attached": true,
+  "provided_documents": [
+    "Original Retail Purchase Invoice (with NTN/STRN)",
+    "Official Dealer Stamped Warranty Card",
+    "Claimant National Identity Card (CNIC) Copy",
+    "Previous Job Cards #JC-4412 and #JC-5891"
+  ],
+  "liquid_damage_detected": false,
+  "physical_damage": false,
+  "tamper_seal_broken": false,
+  "unauthorized_third_party_repair": false,
+  "prior_repairs": [
+    {
+      "repair_date": "2025-07-15",
+      "repaired_component": "direct_drive_inverter_motor",
+      "authorized_service_center": true,
+      "service_center_name": "Haier Official Regional Service Hub"
+    },
+    {
+      "repair_date": "2025-11-20",
+      "repaired_component": "direct_drive_inverter_motor",
+      "authorized_service_center": true,
+      "service_center_name": "Haier Official Regional Service Hub"
+    }
+  ],
+  "prior_replacement": false,
+  "expected_decision": "Manual Review Required",
+  "review_trigger": "Lemon Law / Repeat Component Failure Threshold (2+ prior authorized repairs)"
+}
