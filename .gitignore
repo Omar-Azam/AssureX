@@ -1,0 +1,113 @@
+# ==============================================================================
+# AssureX - Git Ignore Configuration
+# ==============================================================================
+
+# Byte-compiled / optimized / Python execution artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Environment Variables & Sensitive Credentials
+.env
+.env.*
+*.env
+!.env.example
+
+# Testing, Coverage & CI Artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+coverage.xml
+nosetests.xml
+
+# Code Quality & Linter Caches
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# Database Runtime Files, Locks & Journals (SQLite / SQLAlchemy)
+*.sqlite3-journal
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Runtime Uploads & Temporary OCR Files
+uploads/documents/ocr_temp/
+uploads/ocr_temp/
+uploads/temp/
+uploads/tmp/
+tmp/
+temp/
+*.tmp
+
+# Logging & Debug Output
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Packaging & Distribution
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+develop-eggs/
+downloads/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.manifest
+*.spec
+
+# Node & Frontend Tooling (if frontend tooling is initialized)
+node_modules/
+
+# IDE & Editor Configurations
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini

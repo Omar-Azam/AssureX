@@ -25,14 +25,12 @@ logger = logging.getLogger("AssureX.Pipeline")
 def load_policy_for_category(category: str) -> Dict[str, Any]:
     """Load corresponding policy JSON for product category."""
     cat_lower = (category or "").lower()
-    if "smartphone" in cat_lower or "phone" in cat_lower:
+    if "smartphone" in cat_lower or "phone" in cat_lower or "mobile" in cat_lower:
         policy_file = POLICIES_DIR / "smartphone_policy.json"
-    elif "laptop" in cat_lower or "computer" in cat_lower:
-        policy_file = POLICIES_DIR / "laptop_policy.json"
     elif "washing" in cat_lower or "machine" in cat_lower:
         policy_file = POLICIES_DIR / "washing_machine_policy.json"
     else:
-        policy_file = POLICIES_DIR / "smartphone_policy.json"
+        policy_file = POLICIES_DIR / "laptop_policy.json"
 
     if policy_file.is_file():
         try:
